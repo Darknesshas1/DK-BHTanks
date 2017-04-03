@@ -9,7 +9,7 @@ PART
 	node_stack_bottom = 0.0, -3.75, 0.0, 0.0, -1.0, 0.0, 2
 	node_attach = 1.25, 0.0, 0.0, 1.0, 0.0, 0.0, 1
 	TechRequired = advFuelSystems
-	entryCost = 24200
+	entryCost = 90000
 	cost = 25000
 	category = FuelTank
 	subcategory = 0
@@ -27,18 +27,18 @@ PART
 	breakingTorque = 200
 	maxTemp = 2000 // = 2900
 	bulkheadProfiles = size2, srf
-	tags = fueltank ?lfo liquid orange oxidizer propellant rocket
+	tags = fueltank ?lfo liquid impossible oxidizer propellant rocket bht
 	RESOURCE
 	{
 		name = LiquidFuel
-		amount = 0
-		maxAmount = 10000
+		amount = 9000
+		maxAmount = 9000
 	}
 	RESOURCE
 	{
 		name = Oxidizer
-		amount = 0
-		maxAmount = 12222.222
+		amount = 11000
+		maxAmount = 11000
 	}
 }
 
