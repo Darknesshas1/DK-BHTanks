@@ -11,7 +11,7 @@ namespace BHTKSP
 		
 		//Whether or not BH is active
 		[KSPField(isPersistant = true)]
-		public bool BlackHoleEnabled = True //Could we condense these two statements into one by saying <public bool BlackHoleEnabled = FuelAccessible = true;> ?
+		public bool BlackHoleEnabled = true; //Could we condense these two statements into one by saying (public bool BlackHoleEnabled = FuelAccessible = true;) ?
 		
 		//Whether or not fuel is accessible
 		[KSPField(isPersistant = true)]
@@ -23,8 +23,10 @@ namespace BHTKSP
 		
 		//Private Values
 		private double fuelAmount = 0.0;
+		private double lastFuelAmount = 0.0;
 		private double maxFuelAmount = 0.0;
 		private double oxidizerAmount = 0.0;
+		private double lastOxidizerAmount = 0.0;
 		private double maxOxidizerAmount = 0.0;
 		private double blackHoleECCost = 0.0;
 		
@@ -76,8 +78,6 @@ namespace BHTKSP
 				if (part.RequestResource("ElectricCharge", BHECCost * TimeWarp.fixedDeltaTime) < BHECCost * TimeWarp.fixedDeltaTime)
 				{
 					double elapsedTime = part.vessel.missionTime - LastUpdateTime;
-					
-					double 
 				}
 			}
 		}
@@ -86,8 +86,38 @@ namespace BHTKSP
 		
 		
 		
-		
+		public void Update()
+		{
+			if(HighLogic.LoadedSceneIsFlight)
+			{
+				if(BlackHoleEnabled = true)
+				{
+					lastFuelAmount = fuelAmount;
+					ConsumeCharge();
+				}
+				else
+				{
+					fuelAmount = lastFuelAmount;
+					fuelAmount = 0.0;
+				}
+			}
+		}
+
 		protected void ConsumeCharge()
+		{
+			if(TimeWarp.CurrentRate >= 5f)
+			{
+				if(BlackHoleEnabled = true)
+				{
+					double Ec = GetResourceAmount("ElectricCharge");
+					double req = part.RequestResource("ElectricCharge", Ec);
+				}
+			}
+			else
+			{
+				
+			}
+		}
 	}
 }
 
