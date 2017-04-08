@@ -65,7 +65,7 @@ namespace BHTKSP
 			{
 				
 				
-				
+				DoCatchup();
 			}
 		}
 		
@@ -81,8 +81,25 @@ namespace BHTKSP
 				}
 			}
 		}
+		
+		
+		
+		
+		
+		
+		protected void ConsumeCharge()
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
