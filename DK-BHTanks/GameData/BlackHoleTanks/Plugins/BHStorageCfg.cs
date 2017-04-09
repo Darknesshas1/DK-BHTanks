@@ -1,34 +1,37 @@
 using System;
-using KSP;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
 
 namespace BHTKSP
 {
 	public class ModuleBlackHoleLFO : PartModule
-	{		
+	{	
+		[KSPField(isPersistant = false)]
+		public string Fuel1Name;
+		
+		[KSPField(isPersistant = false)]
+		public string Fuel2Name;
+		
 		//Last timestamp the BH was activated
 		[KSPField(isPersistant = true)]
 		public double LastUpdateTime = 0;
 		
 		//Whether or not BH is active
 		[KSPField(isPersistant = true)]
-		public bool BlackHoleEnabled = true; //Could we condense these two statements into one by saying (public bool BlackHoleEnabled = FuelAccessible = true;) ?
-		
-		//Whether or not fuel is accessible
-		[KSPField(isPersistant = true)]
-		public bool FuelAccessible = BlackHoleEnabled;
+		public bool BlackHoleEnabled = true; //This statement is also used for the EC draw, as you can't have one true without the other.
 		
 		//EC cost to keep fuel accessible
 		[KSPField(isPersistant = false)]
 		public float BHECCost = 0.0f;
 		
 		//Private Values
-		private double fuelAmount = 0.0;
-		private double lastFuelAmount = 0.0;
-		private double maxFuelAmount = 0.0;
-		private double oxidizerAmount = 0.0;
-		private double lastOxidizerAmount = 0.0;
-		private double maxOxidizerAmount = 0.0;
-		private double blackHoleECCost = 0.0;
+		private double fuel1MaxAmount = 0.0f;
+		private double fuel1LastAmount = 0.0f;
+		private double fuel2MaxAmount = 0.0f;
+		private double fuel2LastAmount = 0.0f;
+
 		
 		//UI
 		[KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
@@ -65,8 +68,10 @@ namespace BHTKSP
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				
-				
+				fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+				fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
+				fuel1MaxAmount = fuel1LastAmount;
+				fuel2MaxAmount = fuel2LastAmount;
 				DoCatchup();
 			}
 		}
@@ -78,61 +83,73 @@ namespace BHTKSP
 				if (part.RequestResource("ElectricCharge", BHECCost * TimeWarp.fixedDeltaTime) < BHECCost * TimeWarp.fixedDeltaTime)
 				{
 					double elapsedTime = part.vessel.missionTime - LastUpdateTime;
+					
+					part.RequestResource(BHECCost * elapsedTime);
 				}
 			}
 		}
-		
-		
-		
-		
 		
 		public void Update()
 		{
+			if (HighLogic.LoadedSceneIsFlight)
+			{
+				//Linux: Not sure what to put in here. 
+			}
+		}
+		
+		protected void FixedUpdate()
+		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				if(BlackHoleEnabled = true)
-				{
-					lastFuelAmount = fuelAmount;
-					ConsumeCharge();
-				}
+				fuel1Amount = GetResourceAmount(fuel1ResourceName);
+				fuel2Amount = GetResourceAmount(fuel2ResourceName);
+				if (BlackHoleEnabled = true)
+					if (fuel1Amount == fuel2Amount == 0.0)
+					{
+						BlackHoleEnabled = false;
+						BHECCost = 0.0;
+						return;
+					}
+					else
+					{
+						fuel1Amount = fuel1LastAmount;
+						fuel2Amount = fuel2LastAmount;
+						BHECCost = ConsumeCharge();
+					}
 				else
 				{
-					fuelAmount = lastFuelAmount;
-					fuelAmount = 0.0;
+					fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
+					fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
 				}
 			}
 		}
-
+		
 		protected void ConsumeCharge()
 		{
-			if(TimeWarp.CurrentRate >= 5f)
+			if(TimeWarp.CurrentRate > 5f)
 			{
 				if(BlackHoleEnabled = true)
 				{
 					double Ec = GetResourceAmount("ElectricCharge");
 					double req = part.RequestResource("ElectricCharge", Ec);
+					if (Ec <= BHECCost)
+					{
+						BlackHoleEnabled = false;
+					}
+					else if(Ec == 0.0)
+					{
+						BlackHoleEnabled = false;
+					}
+					else
+					{
+						req;
+					}
 				}
 			}
 			else
 			{
-				
+				DoCatchup();
 			}
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
