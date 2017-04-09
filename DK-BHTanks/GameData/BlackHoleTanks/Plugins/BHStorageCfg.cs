@@ -1,3 +1,12 @@
+/*
+Hey Linux, I think I have finished the plugin. 
+I just have a couple of questions for you, if you search the document, I have added comments addressed to you.
+If you have any suggestions, just PM me on the current thread between Darkness, you, and me. 
+I am planning to make another plugin that is basiclly the same, but for only one fuel. 
+Thank you for all your advice! 
+*/
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +15,7 @@ using UnityEngine;
 
 namespace BHTKSP
 {
-	public class ModuleBlackHoleLFO : PartModule
+	public class ModuleBlackHole2Fuel : PartModule
 	{	
 		[KSPField(isPersistant = false)]
 		public string Fuel1Name;
@@ -82,10 +91,12 @@ namespace BHTKSP
 			{
 				if (part.RequestResource("ElectricCharge", BHECCost * TimeWarp.fixedDeltaTime) < BHECCost * TimeWarp.fixedDeltaTime)
 				{
-					double elapsedTime = part.vessel.missionTime - LastUpdateTime;
+					double elapsedTime = part.vessel.missionTime - LastUpdateTime; 
 					
 					part.RequestResource(BHECCost * elapsedTime);
 				}
+				//Linux: Is this the way for using EC during TimeWarp? 
+				//We could also just have the BH deactivate during timewarp, which might be easier. 
 			}
 		}
 		
@@ -93,7 +104,7 @@ namespace BHTKSP
 		{
 			if (HighLogic.LoadedSceneIsFlight)
 			{
-				//Linux: Not sure what to put in here. 
+				//Linux: Not sure what to put in here for GUI stuff. 
 			}
 		}
 		
@@ -101,10 +112,10 @@ namespace BHTKSP
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				fuel1Amount = GetResourceAmount(fuel1ResourceName);
+				fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
 				fuel2Amount = GetResourceAmount(fuel2ResourceName);
 				if (BlackHoleEnabled = true)
-					if (fuel1Amount == fuel2Amount == 0.0)
+					if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
 					{
 						BlackHoleEnabled = false;
 						BHECCost = 0.0;
@@ -136,7 +147,7 @@ namespace BHTKSP
 					{
 						BlackHoleEnabled = false;
 					}
-					else if(Ec == 0.0)
+					else if(Ec == 0.0) //Linux: Else if commands exist in C#, right?
 					{
 						BlackHoleEnabled = false;
 					}
@@ -148,7 +159,7 @@ namespace BHTKSP
 			}
 			else
 			{
-				DoCatchup();
+				DoCatchup(); //Used during timewarp, alternativly could just have the BH turn off if timewarp is higher than 1x
 			}
 		}
 	}
