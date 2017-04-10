@@ -18,7 +18,7 @@ namespace BHTKSP
 	public class ModuleBlackHole2Fuel : PartModule
 	{	
 		[KSPField(isPersistant = false)]
-		public double FuelTypes; //FuelTypes is either equal to one or two to say what type of fuel there is stored in the tank. 
+		public string FuelTypes; //FuelTypes is either equal to one or two to say what type of fuel there is stored in the tank. 
 		
 		[KSPField(isPersistant = false)]
 		public string Fuel1Name;
