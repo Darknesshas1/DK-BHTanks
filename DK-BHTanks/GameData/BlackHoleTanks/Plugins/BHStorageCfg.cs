@@ -113,13 +113,7 @@ namespace BHTKSP
 			}
 		}
 		
-		public void Update()
-		{
-			if (HighLogic.LoadedSceneIsFlight)
-			{
-				//Linux: Not sure what to put in here for GUI stuff. 
-			}
-		}
+		//Got rid of public void Update, uneeded, as we don't have a custom GUI.
 		
 		protected void FixedUpdate()
 		{
