@@ -35,7 +35,7 @@ namespace BHTKSP
 		
 		//Whether or not BH is active
 		[KSPField(isPersistant = true)]
-		public bool BlackHoleEnabled = true; //This statement is also used for the EC draw, as you can't have one true without the other.
+		public bool BlackHoleEnabled = false; //This statement is also used for the EC draw, as you can't have one true without the other.
 		
 		//EC cost to keep fuel accessible
 		[KSPField(isPersistant = false)]
