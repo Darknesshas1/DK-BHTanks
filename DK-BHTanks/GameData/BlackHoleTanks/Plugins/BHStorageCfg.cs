@@ -6,7 +6,6 @@ I am planning to make another plugin that is basiclly the same, but for only one
 Thank you for all your advice! 
 */
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,7 @@ using UnityEngine;
 
 namespace BHTKSP
 {
-	public class ModuleBlackHole2Fuel : PartModule
+	public class ModuleBlackHole : PartModule
 	{	
 		[KSPField(isPersistant = false)]
 		public string FuelTypes; //FuelTypes is either equal to one or two to say what type of fuel there is stored in the tank. 
