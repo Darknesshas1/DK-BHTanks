@@ -18,7 +18,13 @@ namespace BHTKSP
 	public class ModuleBlackHole2Fuel : PartModule
 	{	
 		[KSPField(isPersistant = false)]
+		public double FuelTypes; //FuelTypes is either equal to one or two to say what type of fuel there is stored in the tank. 
+		
+		[KSPField(isPersistant = false)]
 		public string Fuel1Name;
+		
+		[KSPField(isPersistant = false)]
+		public bool Fuel2Active;
 		
 		[KSPField(isPersistant = false)]
 		public string Fuel2Name;
@@ -77,10 +83,19 @@ namespace BHTKSP
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
-				fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
-				fuel1MaxAmount = fuel1LastAmount;
-				fuel2MaxAmount = fuel2LastAmount;
+				if(FuelTypes = 1)
+				{
+					Fuel2Active = false;
+					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+					fuel1MaxAmount = fuel1LastAmount;
+				}
+				else
+				{
+					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+					fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
+					fuel1MaxAmount = fuel1LastAmount;
+					fuel2MaxAmount = fuel2LastAmount;
+				}
 				DoCatchup();
 			}
 		}
@@ -112,25 +127,48 @@ namespace BHTKSP
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
-				fuel2Amount = GetResourceAmount(fuel2ResourceName);
-				if (BlackHoleEnabled = true)
-					if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
-					{
-						BlackHoleEnabled = false;
-						BHECCost = 0.0;
-						return;
-					}
+				if(Fuel2Active = false)
+				{
+					fuel1Amount = GetResourceAmount(fuel1ResourceName);
+					if (BlackHoleEnabled = true)
+						if (fuel1Amount == 0.0)
+						{
+							BlackHoleEnabled = false;
+							BHECCost = 0.0;
+							return;
+						}
+						else
+						{
+							fuel1Amount = fuel1LastAmount;
+							BHECCost = ConsumeCharge();
+						}
 					else
 					{
-						fuel1Amount = fuel1LastAmount;
-						fuel2Amount = fuel2LastAmount;
-						BHECCost = ConsumeCharge();
+						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
 					}
+				}
 				else
 				{
-					fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
-					fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
+					fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
+					fuel2Amount = GetResourceAmount(fuel2ResourceName);
+					if (BlackHoleEnabled = true)
+						if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
+						{
+							BlackHoleEnabled = false;
+							BHECCost = 0.0;
+							return;
+						}
+						else
+						{
+							fuel1Amount = fuel1LastAmount;
+							fuel2Amount = fuel2LastAmount;
+							BHECCost = ConsumeCharge();
+						}
+					else
+					{
+						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
+						fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
+					}
 				}
 			}
 		}
