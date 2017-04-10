@@ -2,7 +2,6 @@
 Hey Linux, I think I have finished the plugin. 
 I just have a couple of questions for you, if you search the document, I have added comments addressed to you.
 If you have any suggestions, just PM me on the current thread between Darkness, you, and me. 
-I am planning to make another plugin that is basiclly the same, but for only one fuel. 
 Thank you for all your advice! 
 */
 
@@ -174,7 +173,7 @@ namespace BHTKSP
 		
 		protected void ConsumeCharge()
 		{
-			if(TimeWarp.CurrentRate > 5f)
+			if(TimeWarp.CurrentRate > 1f)
 			{
 				if(BlackHoleEnabled = true)
 				{
@@ -184,7 +183,7 @@ namespace BHTKSP
 					{
 						BlackHoleEnabled = false;
 					}
-					else if(Ec == 0.0) //Linux: Else if commands exist in C#, right?
+					else if(Ec == 0.0)
 					{
 						BlackHoleEnabled = false;
 					}

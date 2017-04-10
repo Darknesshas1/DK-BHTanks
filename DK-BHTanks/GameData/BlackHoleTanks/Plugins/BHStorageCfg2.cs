@@ -6,4 +6,12 @@ using UnityEngine;
 
 namespace BHTKSP
 {
-	public class 
+	public class fuelType
+	{
+		public string Name;
+		public float maxAmount;
+		public float lastAmount;
+	}
+	public class fuelType2
+	{
+		
