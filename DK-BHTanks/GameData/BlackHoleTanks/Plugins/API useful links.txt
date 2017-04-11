@@ -3,3 +3,5 @@ ResourceDisplayOptions (KSP.UI.Screens)
 
 PartResource
 PartResourceList
+
+Yay for stuff!
