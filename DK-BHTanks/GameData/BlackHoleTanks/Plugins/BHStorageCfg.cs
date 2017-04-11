@@ -2,10 +2,8 @@
 Hey Linux, I think I have finished the plugin. 
 I just have a couple of questions for you, if you search the document, I have added comments addressed to you.
 If you have any suggestions, just PM me on the current thread between Darkness, you, and me. 
-I am planning to make another plugin that is basiclly the same, but for only one fuel. 
 Thank you for all your advice! 
 */
-
 
 using System;
 using System.Collections.Generic;
@@ -15,10 +13,16 @@ using UnityEngine;
 
 namespace BHTKSP
 {
-	public class ModuleBlackHole2Fuel : PartModule
+	public class ModuleBlackHole : PartModule
 	{	
 		[KSPField(isPersistant = false)]
+		public string FuelTypes; //FuelTypes is either equal to one or two to say what type of fuel there is stored in the tank. 
+		
+		[KSPField(isPersistant = false)]
 		public string Fuel1Name;
+		
+		[KSPField(isPersistant = false)]
+		public bool Fuel2Active;
 		
 		[KSPField(isPersistant = false)]
 		public string Fuel2Name;
@@ -29,7 +33,7 @@ namespace BHTKSP
 		
 		//Whether or not BH is active
 		[KSPField(isPersistant = true)]
-		public bool BlackHoleEnabled = true; //This statement is also used for the EC draw, as you can't have one true without the other.
+		public bool BlackHoleEnabled = false; //This statement is also used for the EC draw, as you can't have one true without the other.
 		
 		//EC cost to keep fuel accessible
 		[KSPField(isPersistant = false)]
@@ -77,10 +81,19 @@ namespace BHTKSP
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
-				fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
-				fuel1MaxAmount = fuel1LastAmount;
-				fuel2MaxAmount = fuel2LastAmount;
+				if(FuelTypes = 1)
+				{
+					Fuel2Active = false;
+					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+					fuel1MaxAmount = fuel1LastAmount;
+				}
+				else
+				{
+					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+					fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
+					fuel1MaxAmount = fuel1LastAmount;
+					fuel2MaxAmount = fuel2LastAmount;
+				}
 				DoCatchup();
 			}
 		}
@@ -100,44 +113,61 @@ namespace BHTKSP
 			}
 		}
 		
-		public void Update()
-		{
-			if (HighLogic.LoadedSceneIsFlight)
-			{
-				//Linux: Not sure what to put in here for GUI stuff. 
-			}
-		}
+		//Got rid of public void Update, uneeded, as we don't have a custom GUI.
 		
 		protected void FixedUpdate()
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
-				fuel2Amount = GetResourceAmount(fuel2ResourceName);
-				if (BlackHoleEnabled = true)
-					if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
-					{
-						BlackHoleEnabled = false;
-						BHECCost = 0.0;
-						return;
-					}
+				if(Fuel2Active = false)
+				{
+					fuel1Amount = GetResourceAmount(fuel1ResourceName);
+					if (BlackHoleEnabled = true)
+						if (fuel1Amount == 0.0)
+						{
+							BlackHoleEnabled = false;
+							BHECCost = 0.0;
+							return;
+						}
+						else
+						{
+							fuel1Amount = fuel1LastAmount;
+							BHECCost = ConsumeCharge();
+						}
 					else
 					{
-						fuel1Amount = fuel1LastAmount;
-						fuel2Amount = fuel2LastAmount;
-						BHECCost = ConsumeCharge();
+						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
 					}
+				}
 				else
 				{
-					fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
-					fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
+					fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
+					fuel2Amount = GetResourceAmount(fuel2ResourceName);
+					if (BlackHoleEnabled = true)
+						if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
+						{
+							BlackHoleEnabled = false;
+							BHECCost = 0.0;
+							return;
+						}
+						else
+						{
+							fuel1Amount = fuel1LastAmount;
+							fuel2Amount = fuel2LastAmount;
+							BHECCost = ConsumeCharge();
+						}
+					else
+					{
+						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
+						fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
+					}
 				}
 			}
 		}
 		
 		protected void ConsumeCharge()
 		{
-			if(TimeWarp.CurrentRate > 5f)
+			if(TimeWarp.CurrentRate > 1f)
 			{
 				if(BlackHoleEnabled = true)
 				{
@@ -147,7 +177,7 @@ namespace BHTKSP
 					{
 						BlackHoleEnabled = false;
 					}
-					else if(Ec == 0.0) //Linux: Else if commands exist in C#, right?
+					else if(Ec == 0.0)
 					{
 						BlackHoleEnabled = false;
 					}
