@@ -121,7 +121,7 @@ namespace BHTKSP
 			{
 				if(Fuel2Active = false)
 				{
-					fuel1Amount = GetResourceAmount(fuel1ResourceName);
+					fuel1Amount = PartResource(fuel1ResourceName);
 					if (BlackHoleEnabled = true)
 						if (fuel1Amount == 0.0)
 						{
@@ -136,13 +136,13 @@ namespace BHTKSP
 						}
 					else
 					{
-						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
+						fuel1LastAmount = PartResource(fuel1ResourceName);
 					}
 				}
 				else
 				{
-					fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
-					fuel2Amount = GetResourceAmount(fuel2ResourceName);
+					fuel1Amount = PartResouce(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
+					fuel2Amount = PartResource(fuel2ResourceName);
 					if (BlackHoleEnabled = true)
 						if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
 						{
@@ -158,8 +158,8 @@ namespace BHTKSP
 						}
 					else
 					{
-						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
-						fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
+						fuel1LastAmount = PartResource(fuel1ResourceName);
+						fuel2LastAmount = PartResource(fuel2ResourceName);
 					}
 				}
 			}
