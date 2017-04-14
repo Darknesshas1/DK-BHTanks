@@ -77,6 +77,23 @@ namespace BHTKSP
 			BlackHoleEnabled = !BlackHoleEnabled
 		}
 		
+		
+		//Credit for the next two sections goes to Nertea
+		protected double GetResourceAmount(string nm)
+        {
+            PartResource res = this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id);
+            return res.amount;
+        }
+        protected double GetMaxResourceAmount(string nm)
+        {
+            int id = PartResourceLibrary.Instance.GetDefinition(nm).id;
+
+            PartResource res = this.part.Resources.Get(id);
+
+            return res.maxAmount;
+        }
+		//Thanks Nertea!!!
+		
 		public void Start()
 		{
 			if(HighLogic.LoadedSceneIsFlight)
@@ -89,6 +106,7 @@ namespace BHTKSP
 				}
 				else
 				{
+					Fuel2Active = true;
 					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
 					fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
 					fuel1MaxAmount = fuel1LastAmount;
@@ -121,7 +139,7 @@ namespace BHTKSP
 			{
 				if(Fuel2Active = false)
 				{
-					fuel1Amount = PartResource(fuel1ResourceName);
+					fuel1Amount = GetResourceAmount(fuel1ResourceName);
 					if (BlackHoleEnabled = true)
 						if (fuel1Amount == 0.0)
 						{
@@ -136,13 +154,13 @@ namespace BHTKSP
 						}
 					else
 					{
-						fuel1LastAmount = PartResource(fuel1ResourceName);
+						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
 					}
 				}
 				else
 				{
-					fuel1Amount = PartResouce(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
-					fuel2Amount = PartResource(fuel2ResourceName);
+					fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
+					fuel2Amount = GetResourceAmount(fuel2ResourceName);
 					if (BlackHoleEnabled = true)
 						if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
 						{
@@ -158,8 +176,8 @@ namespace BHTKSP
 						}
 					else
 					{
-						fuel1LastAmount = PartResource(fuel1ResourceName);
-						fuel2LastAmount = PartResource(fuel2ResourceName);
+						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
+						fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
 					}
 				}
 			}
