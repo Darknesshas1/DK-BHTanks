@@ -77,8 +77,7 @@ namespace BHTKSP
 			BlackHoleEnabled = !BlackHoleEnabled
 		}
 		
-		
-		//Credit for the next two sections goes to Nertea
+		//Credit for the next two sections goes to Nertea, used with his permission.
 		protected double GetResourceAmount(string nm)
         {
             PartResource res = this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id);
