@@ -103,10 +103,10 @@ namespace BHTKSP
 					Fuel2Active = true;
 					fuel2MaxAmount = fuel2LastAmount;
 				}
-           else
-           {
-              Fuel2Active = false;
-           }
+                                else
+                                {
+                                        Fuel2Active = false;
+                                }
 				DoCatchup();
 			}
 		}
@@ -148,7 +148,7 @@ namespace BHTKSP
 					else
 					{
 						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
-                          fuel1Amount = 0;
+                                                fuel1Amount = 0;
 					}
 				}
 				else
@@ -172,7 +172,7 @@ namespace BHTKSP
 					{
 						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
 						fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
-                 fuel1Amount = fuel2Amount = 0;
+                                                fuel1Amount = fuel2Amount = 0;
 					}
 				}
 			}
