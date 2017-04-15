@@ -82,18 +82,18 @@ namespace BHTKSP
 		
 		//Credit for the next two sections goes to Nertea, used with his permission.
 		protected double GetResourceAmount(string nm)
-        {
-            PartResource res = this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id);
-            return res.amount;
-        }
-        protected double GetMaxResourceAmount(string nm)
-        {
-            int id = PartResourceLibrary.Instance.GetDefinition(nm).id;
+      {
+         PartResource res = this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id);
+         return res.amount;
+      }
+      protected double GetMaxResourceAmount(string nm)
+      {
+         int id = PartResourceLibrary.Instance.GetDefinition(nm).id;
 
-            PartResource res = this.part.Resources.Get(id);
+         PartResource res = this.part.Resources.Get(id);
 
-            return res.maxAmount;
-        }
+         return res.maxAmount;
+      }
 		//Thanks Nertea!!!
 		
 		public void Start()
@@ -101,15 +101,14 @@ namespace BHTKSP
 			if(HighLogic.LoadedSceneIsFlight)
 			{
 				Fuel2Active = false;
-fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
-fuel1MaxAmount = fuel1LastAmount;
+				fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+				fuel1MaxAmount = fuel1LastAmount;
 
-if(FuelTypes = 1)
-{
-	Fuel2Active = true;
-	fuel1MaxAmount = fuel1LastAmount;
-	fuel2MaxAmount = fuel2LastAmount;
-}
+				if(FuelTypes = 2)
+				{
+					Fuel2Active = true;
+					fuel2MaxAmount = fuel2LastAmount;
+				}
 				DoCatchup();
 			}
 		}
@@ -124,8 +123,6 @@ if(FuelTypes = 1)
 					
 					part.RequestResource(BHECCost * elapsedTime);
 				}
-				//Linux: Is this the way for using EC during TimeWarp? 
-				//We could also just have the BH deactivate during timewarp, which might be easier. 
 			}
 		}
 		
@@ -157,10 +154,10 @@ if(FuelTypes = 1)
 				}
 				else
 				{
-					fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
+					fuel1Amount = GetResourceAmount(fuel1ResourceName);
 					fuel2Amount = GetResourceAmount(fuel2ResourceName);
 					if (BlackHoleEnabled = true)
-						if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
+						if (fuel1Amount == fuel2Amount == 0.0)
 						{
 							BlackHoleEnabled = false;
 							BHECCost = 0.0;
