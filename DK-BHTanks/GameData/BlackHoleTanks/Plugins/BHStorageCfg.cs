@@ -153,7 +153,7 @@ namespace BHTKSP
 					else
 					{
 						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
-                 fuel1Amount = 0;
+                          fuel1Amount = 0;
 					}
 				}
 				else
