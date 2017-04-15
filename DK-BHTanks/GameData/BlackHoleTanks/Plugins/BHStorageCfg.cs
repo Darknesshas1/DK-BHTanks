@@ -1,9 +1,4 @@
 /*
-Hey Linux, I think I have finished the plugin. 
-I just have a couple of questions for you, if you search the document, I have added comments addressed to you.
-If you have any suggestions, just PM me on the current thread between Darkness, you, and me. 
-Thank you for all your advice! 
-
 This plugin is meant to shut off fuel supplies when ElectricCharge is not applied, and allow access when it is. 
 Credit goes to DarkenessHassFallen, LinuxGuruGamer, and Benjamin Kerman on the Kerbal Space Program Forums
 */
