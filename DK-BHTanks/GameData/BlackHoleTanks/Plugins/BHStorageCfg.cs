@@ -100,20 +100,16 @@ namespace BHTKSP
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				if(FuelTypes = 1)
-				{
-					Fuel2Active = false;
-					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
-					fuel1MaxAmount = fuel1LastAmount;
-				}
-				else
-				{
-					Fuel2Active = true;
-					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
-					fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
-					fuel1MaxAmount = fuel1LastAmount;
-					fuel2MaxAmount = fuel2LastAmount;
-				}
+				Fuel2Active = false;
+fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+fuel1MaxAmount = fuel1LastAmount;
+
+if(FuelTypes = 1)
+{
+	Fuel2Active = true;
+	fuel1MaxAmount = fuel1LastAmount;
+	fuel2MaxAmount = fuel2LastAmount;
+}
 				DoCatchup();
 			}
 		}
