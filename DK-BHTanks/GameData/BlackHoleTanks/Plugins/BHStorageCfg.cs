@@ -1,9 +1,4 @@
 /*
-Hey Linux, I think I have finished the plugin. 
-I just have a couple of questions for you, if you search the document, I have added comments addressed to you.
-If you have any suggestions, just PM me on the current thread between Darkness, you, and me. 
-Thank you for all your advice! 
-
 This plugin is meant to shut off fuel supplies when ElectricCharge is not applied, and allow access when it is. 
 Credit goes to DarkenessHassFallen, LinuxGuruGamer, and Benjamin Kerman on the Kerbal Space Program Forums
 */
@@ -82,38 +77,36 @@ namespace BHTKSP
 		
 		//Credit for the next two sections goes to Nertea, used with his permission.
 		protected double GetResourceAmount(string nm)
-        {
-            PartResource res = this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id);
-            return res.amount;
-        }
-        protected double GetMaxResourceAmount(string nm)
-        {
-            int id = PartResourceLibrary.Instance.GetDefinition(nm).id;
+      {
+         PartResource res = this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id);
+         return res.amount;
+      }
+      protected double GetMaxResourceAmount(string nm)
+      {
+         int id = PartResourceLibrary.Instance.GetDefinition(nm).id;
 
-            PartResource res = this.part.Resources.Get(id);
+         PartResource res = this.part.Resources.Get(id);
 
-            return res.maxAmount;
-        }
+         return res.maxAmount;
+      }
 		//Thanks Nertea!!!
 		
 		public void Start()
 		{
 			if(HighLogic.LoadedSceneIsFlight)
 			{
-				if(FuelTypes = 1)
-				{
-					Fuel2Active = false;
-					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
-					fuel1MaxAmount = fuel1LastAmount;
-				}
-				else
+				fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
+				fuel1MaxAmount = fuel1LastAmount;
+
+				if(FuelTypes = 2)
 				{
 					Fuel2Active = true;
-					fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
-					fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
-					fuel1MaxAmount = fuel1LastAmount;
 					fuel2MaxAmount = fuel2LastAmount;
 				}
+                                else
+                                {
+                                        Fuel2Active = false;
+                                }
 				DoCatchup();
 			}
 		}
@@ -128,8 +121,6 @@ namespace BHTKSP
 					
 					part.RequestResource(BHECCost * elapsedTime);
 				}
-				//Linux: Is this the way for using EC during TimeWarp? 
-				//We could also just have the BH deactivate during timewarp, which might be easier. 
 			}
 		}
 		
@@ -157,14 +148,15 @@ namespace BHTKSP
 					else
 					{
 						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
+                                                fuel1Amount = 0;
 					}
 				}
 				else
 				{
-					fuel1Amount = GetResourceAmount(fuel1ResourceName); //Linux: Will this command only check for the fuel amount in the part?
+					fuel1Amount = GetResourceAmount(fuel1ResourceName);
 					fuel2Amount = GetResourceAmount(fuel2ResourceName);
 					if (BlackHoleEnabled = true)
-						if (fuel1Amount == fuel2Amount == 0.0) //Can you do x == y == 1 like in here?
+						if (fuel1Amount == fuel2Amount == 0.0)
 						{
 							BlackHoleEnabled = false;
 							BHECCost = 0.0;
@@ -180,6 +172,7 @@ namespace BHTKSP
 					{
 						fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
 						fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
+                                                fuel1Amount = fuel2Amount = 0;
 					}
 				}
 			}
