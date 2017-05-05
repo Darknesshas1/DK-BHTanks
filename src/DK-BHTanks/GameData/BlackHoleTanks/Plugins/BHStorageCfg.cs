@@ -49,11 +49,11 @@ namespace BHTKSP
         public string BlackHoleStatus = "N/A"
 
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
-
         public void Enable()
         {
             BlackHoleEnabled = true;
         }
+
         [KSPEvent(guiActive = false, guiName = "Deactivate Black Hole", active = false)]
         public void Disable()
         {
