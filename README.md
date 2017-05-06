@@ -1,2 +1,2 @@
 # DK-BHTanks
-DarknesshasLost and Benjamin Kermans Black hole tank mod for KSP
+DarknesshasLost and Benjamin Kerman's Black hole tank mod for KSP
