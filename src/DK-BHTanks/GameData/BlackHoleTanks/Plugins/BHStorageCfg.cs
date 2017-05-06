@@ -62,16 +62,10 @@ namespace BHTKSP
 
         //Actions
         [KSPAction("Activate Black Hole")]
-        public void ActivateBlackHole(KSPActionParam param)
-        {
-            this.activateBlackHole;
-        }
+        public void EnableAction(KSPActionParam param) { Enable(); }
 
         [KSPAction("Deactivate Black Hole")]
-        public void DeactivateBlackHole(KSPActionParam param)
-        {
-            this.deactivateBlackHole;
-        }
+        public void DisableAction(KSPActionParam param) { Disable(); }
 
         [KSPAction("Toggle Black Hole")]
         public void ToggleResourcesAction(KSPActionParam param)
