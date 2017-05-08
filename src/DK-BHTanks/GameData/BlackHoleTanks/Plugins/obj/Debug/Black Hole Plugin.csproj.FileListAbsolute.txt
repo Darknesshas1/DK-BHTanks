@@ -1,1 +1,2 @@
 C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\Black Hole Plugin.csprojResolveAssemblyReference.cache
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\Black Hole Plugin.csprojResolveAssemblyReference.cache

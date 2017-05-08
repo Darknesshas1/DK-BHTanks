@@ -14,7 +14,7 @@ namespace BHTKSP
     public class ModuleBlackHole : PartModule
     {
         [KSPField(isPersistant = false)]
-        public string FuelTypes; //FuelTypes is either equal to one or two to say what type of fuel there is stored in the tank. 
+        public double FuelTypes; //FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. 
 
         [KSPField(isPersistant = false)]
         public string Fuel1Name;
@@ -45,12 +45,14 @@ namespace BHTKSP
         private double fuel2MaxAmount = 0.0f;
         private double fuel2LastAmount = 0.0f;
 
-
-        //UI
         [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
-        public string BlackHoleStatus = "N/A"
+        public string BlackHoleStatus = "N/A";
 
-        [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
+
+        private double fuelAmount = 0.0f; //Somehow makes everything work? DO NOT TOUCH!!!
+
+
+        [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]//Without the above variable, this is not recognized...
         public void Enable()
         {
             BlackHoleEnabled = true;
@@ -98,7 +100,7 @@ namespace BHTKSP
                 fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
                 fuel1MaxAmount = fuel1LastAmount;
 
-                if (FuelTypes = 2)
+                if (FuelTypes == 2)
                 {
                     Fuel2Active = true;
                     fuel2MaxAmount = fuel2LastAmount;
@@ -119,7 +121,11 @@ namespace BHTKSP
                 {
                     double elapsedTime = part.vessel.missionTime - LastUpdateTime;
 
-                    part.RequestResource(BHECCost * elapsedTime);
+                    part.RequestResource(Fuel1Name, BHECCost * elapsedTime);//For fuel 1
+                    if(Fuel2Active == true)
+                    {
+                        part.RequestResource(Fuel2Name, BHECCost * elapsedTime);//Only happens if Fuel2 is active
+                    }
                 }
             }
         }
@@ -154,7 +160,7 @@ namespace BHTKSP
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     fuel2Amount = GetResourceAmount(Fuel2Name);
                     if (BlackHoleEnabled == true)
-                        if (fuel1Amount == fuel2Amount = 0.0)
+                        if (fuel1Amount = fuel2Amount = 0.0)
                         {
                             BlackHoleEnabled = false;
                             BHECCost = 0;
