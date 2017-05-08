@@ -38,6 +38,8 @@ namespace BHTKSP
         public float BHECCost = 0.0f;
 
         //Private Values
+        private double fuel1Amount = 0.0f;
+        private double fuel2Amount = 0.0f;
         private double fuel1MaxAmount = 0.0f;
         private double fuel1LastAmount = 0.0f;
         private double fuel2MaxAmount = 0.0f;
@@ -70,8 +72,7 @@ namespace BHTKSP
         [KSPAction("Toggle Black Hole")]
         public void ToggleResourcesAction(KSPActionParam param)
         {
-            BlackHoleEnabled = !BlackHoleEnabled
-
+            BlackHoleEnabled = !BlackHoleEnabled;
         }
 
         //Credit for the next two sections goes to Nertea, used with his permission.
@@ -131,46 +132,44 @@ namespace BHTKSP
             {
                 if (Fuel2Active == false)
                 {
-                    fuel1Amount = GetResourceAmount(fuel1ResourceName);
+                    fuel1Amount = GetResourceAmount(Fuel1Name);
                     if (BlackHoleEnabled == true)
                         if (fuel1Amount == 0.0)
                         {
                             BlackHoleEnabled = false;
-                            BHECCost = 0.0;
-                            return;
                         }
                         else
                         {
                             fuel1Amount = fuel1LastAmount;
-                            BHECCost = ConsumeCharge();
+                            ConsumeCharge();
                         }
                     else
                     {
-                        fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
+                        fuel1LastAmount = GetResourceAmount(Fuel1Name);
                         fuel1Amount = 0;
                     }
                 }
                 else
                 {
-                    fuel1Amount = GetResourceAmount(fuel1ResourceName);
-                    fuel2Amount = GetResourceAmount(fuel2ResourceName);
+                    fuel1Amount = GetResourceAmount(Fuel1Name);
+                    fuel2Amount = GetResourceAmount(Fuel2Name);
                     if (BlackHoleEnabled == true)
-                        if (fuel1Amount == fuel2Amount == 0.0)
+                        if (fuel1Amount == fuel2Amount = 0.0)
                         {
                             BlackHoleEnabled = false;
-                            BHECCost = 0.0;
+                            BHECCost = 0;
                             return;
                         }
                         else
                         {
                             fuel1Amount = fuel1LastAmount;
                             fuel2Amount = fuel2LastAmount;
-                            BHECCost = ConsumeCharge();
+                            ConsumeCharge();
                         }
                     else
                     {
-                        fuel1LastAmount = GetResourceAmount(fuel1ResourceName);
-                        fuel2LastAmount = GetResourceAmount(fuel2ResourceName);
+                        fuel1LastAmount = GetResourceAmount(Fuel1Name);
+                        fuel2LastAmount = GetResourceAmount(Fuel2Name);
                         fuel1Amount = fuel2Amount = 0;
                     }
                 }

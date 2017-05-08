@@ -45,9 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="API useful links.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="BHStorageCfg.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
