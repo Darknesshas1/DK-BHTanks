@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using KSP;
 
 namespace BHTKSP
 {
@@ -97,6 +98,7 @@ namespace BHTKSP
         static double Req(string res)
         {
             return part.RequestResource(res, BHECost);
+            Debug.Log("BHT Requesting EC");
         }
 
         public void Start()
@@ -126,7 +128,7 @@ namespace BHTKSP
                 if (part.RequestResource("ElectricCharge", BHECCost * TimeWarp.fixedDeltaTime) < BHECCost * TimeWarp.fixedDeltaTime)
                 {
                     double elapsedTime = part.vessel.missionTime - LastUpdateTime;
-
+                    Debug.Log("BHT Now doing catchup");
                     part.RequestResource(Fuel1Name, BHECCost * elapsedTime);//For fuel 1
                     if(Fuel2Active == true)
                     {
@@ -194,18 +196,24 @@ namespace BHTKSP
             {
                 if (BlackHoleEnabled == true)
                 {
+                    Debug.Log("BHT Black hole enabled");
                     double Ec = GetResourceAmount("ElectricCharge");
                     if (Ec <= BHECCost)
                     {
                         BlackHoleEnabled = false;
+                        Debug.Log("BHT not enough EC");
+                        Debug.Log("BHT Black hole disabled");
                     }
                     else if (Ec == 0.0)
                     {
                         BlackHoleEnabled = false;
+                        Debug.Log("BHT no EC");
+                        Debug.Log("BHT Black hole disabled");
                     }
                     else
                     {
                         Req("ElectricCharge");
+                        Debug.Log("BHT using electric charge!");
                     }
                 }
             }
