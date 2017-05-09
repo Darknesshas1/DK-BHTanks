@@ -36,7 +36,7 @@ namespace BHTKSP
 
         //EC cost to keep fuel accessible
         [KSPField(isPersistant = false)]
-        public float BHECCost = 0.0f;
+        public double BHECCost = 0.0f;
 
         //Private Values
         private double fuel1Amount = 0.0f;
@@ -49,9 +49,7 @@ namespace BHTKSP
         [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus = "N/A";
 
-
-        //private double fuelAmount = 0.0f; //Somehow makes everything work? DO NOT TOUCH!!!
-
+        //RIP magic var, you served us well
 
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]//Without the above variable, this is not recognized...
         public void Enable()
@@ -94,10 +92,9 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
 
-
         static double Req(string res)
         {
-            return part.RequestResource(res, BHECCost);
+            return Part.RequestResource(res, 0);//Fix needed to make equal to BHECCost...
             Debug.Log("BHT Requesting EC");
         }
 
@@ -168,7 +165,7 @@ namespace BHTKSP
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     fuel2Amount = GetResourceAmount(Fuel2Name);
                     if (BlackHoleEnabled == true)
-                        if (fuel1Amount == fuel2Amount == 0.0)
+                        if (fuel1Amount == 0 && fuel2Amount == 0)
                         {
                             BlackHoleEnabled = false;
                             BHECCost = 0;
