@@ -93,6 +93,12 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
 
+
+        static double Req(string res)
+        {
+            return part.RequestResource(res, BHECost);
+        }
+
         public void Start()
         {
             if (HighLogic.LoadedSceneIsFlight)
@@ -189,7 +195,6 @@ namespace BHTKSP
                 if (BlackHoleEnabled == true)
                 {
                     double Ec = GetResourceAmount("ElectricCharge");
-                    double req = part.RequestResource("ElectricCharge", Ec);
                     if (Ec <= BHECCost)
                     {
                         BlackHoleEnabled = false;
@@ -200,7 +205,7 @@ namespace BHTKSP
                     }
                     else
                     {
-                        req;
+                        Req("ElectricCharge");
                     }
                 }
             }
