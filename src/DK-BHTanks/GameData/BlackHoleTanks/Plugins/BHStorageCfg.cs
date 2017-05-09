@@ -50,7 +50,7 @@ namespace BHTKSP
         public string BlackHoleStatus = "N/A";
 
 
-        private double fuelAmount = 0.0f; //Somehow makes everything work? DO NOT TOUCH!!!
+        //private double fuelAmount = 0.0f; //Somehow makes everything work? DO NOT TOUCH!!!
 
 
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]//Without the above variable, this is not recognized...
@@ -97,7 +97,7 @@ namespace BHTKSP
 
         static double Req(string res)
         {
-            return part.RequestResource(res, BHECost);
+            return part.RequestResource(res, BHECCost);
             Debug.Log("BHT Requesting EC");
         }
 
@@ -168,7 +168,7 @@ namespace BHTKSP
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     fuel2Amount = GetResourceAmount(Fuel2Name);
                     if (BlackHoleEnabled == true)
-                        if (fuel1Amount = fuel2Amount = 0.0)
+                        if (fuel1Amount == fuel2Amount == 0.0)
                         {
                             BlackHoleEnabled = false;
                             BHECCost = 0;
