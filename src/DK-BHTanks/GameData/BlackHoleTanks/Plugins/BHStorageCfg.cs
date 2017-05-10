@@ -36,7 +36,7 @@ namespace BHTKSP
 
         //EC cost to keep fuel accessible
         [KSPField(isPersistant = false)]
-        public double BHECCost = 0.0f;
+        public static double BHECCost = 0.0f;
 
         //Private Values
         private double fuel1Amount = 0.0f;
@@ -94,7 +94,7 @@ namespace BHTKSP
 
         static double Req(string res)
         {
-            return Part.RequestResource(res, 0.0f);//Fix needed to make equal to BHECCost...
+            return Part.RequestResource(res, BHECCost());//Fix needed to make equal to BHECCost...
             Debug.Log("BHT Requesting EC");
         }
 
