@@ -94,7 +94,7 @@ namespace BHTKSP
 
         static double Req(string res)
         {
-            return Part.RequestResource(res, BHECCost());//Fix needed to make equal to BHECCost...
+            return Part.RequestResource(res, BHECCost);//Fix needed to make equal to BHECCost...
             Debug.Log("BHT Requesting EC");
         }
 
