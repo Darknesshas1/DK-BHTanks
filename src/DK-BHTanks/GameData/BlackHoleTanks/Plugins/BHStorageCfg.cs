@@ -36,7 +36,7 @@ namespace BHTKSP
 
         //EC cost to keep fuel accessible
         [KSPField(isPersistant = false)]
-        public static double BHECCost = 0.0f;
+        public static void BHECCost(double ECDraw);
 
         //Private Values
         private double fuel1Amount = 0.0f;
