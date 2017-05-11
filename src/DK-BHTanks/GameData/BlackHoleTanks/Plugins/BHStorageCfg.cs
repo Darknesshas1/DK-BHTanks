@@ -92,7 +92,7 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
 
-        static double Req(string res)
+        private double Req(string res)
         {
             return part.RequestResource(res, BHECCost);//Fix needed to make equal to BHECCost...
             Debug.Log("BHT Requesting EC");
