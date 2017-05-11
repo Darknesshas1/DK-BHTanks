@@ -95,17 +95,17 @@ namespace BHTKSP
             Debug.Log("BHT Requesting EC");
         }
         
-        private bool Fuel2Active()
+        private bool Fuel2Active(bool fuel2State)
         {
             if(FuelTypes == 1)
             {
-                Fuel2Active = false;
+                return fuel2State = false;
             }
             else
             {
-                Fuel2Active = true;
+                return fuel2State = true;
             }
-            Debug.Log("BHT var Fuel2Active set"+Fuel2Active)
+            Debug.Log("BHT var Fuel2Active set" + fuel2State);
         }
 
         public void Start()
@@ -117,12 +117,12 @@ namespace BHTKSP
 
                 if (FuelTypes == 2)
                 {
-                    Fuel2Active = true;
+                    Fuel2Active(true);
                     fuel2MaxAmount = fuel2LastAmount;
                 }
                 else
                 {
-                    Fuel2Active = false;
+                    Fuel2Active(false);
                 }
                 DoCatchup();
             }
@@ -137,7 +137,7 @@ namespace BHTKSP
                     double elapsedTime = part.vessel.missionTime - LastUpdateTime;
                     Debug.Log("BHT Now doing catchup");
                     part.RequestResource(Fuel1Name, BHECCost * elapsedTime);//For fuel 1
-                    if(Fuel2Active == true)
+                    if(Fuel2Active(true))
                     {
                         part.RequestResource(Fuel2Name, BHECCost * elapsedTime);//Only happens if Fuel2 is active
                     }
@@ -151,7 +151,7 @@ namespace BHTKSP
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
-                if (Fuel2Active == false)
+                if (Fuel2Active(false))
                 {
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     if (BlackHoleEnabled == true)
