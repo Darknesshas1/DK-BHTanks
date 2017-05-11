@@ -48,13 +48,13 @@ namespace BHTKSP
 
         //RIP magic var, you served us well
 
-        [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]//Without the above variable, this is not recognized...
+        [KSPEvent(guiActive = true, guiName = "Activate Black Hole", active = true)]
         public void Enable()
         {
             BlackHoleEnabled = true;
         }
 
-        [KSPEvent(guiActive = false, guiName = "Deactivate Black Hole", active = false)]
+        [KSPEvent(guiActive = true, guiName = "Deactivate Black Hole", active = true)]
         public void Disable()
         {
             BlackHoleEnabled = false;
@@ -91,8 +91,8 @@ namespace BHTKSP
 
         private double Req(string res)
         {
-            return part.RequestResource(res, BHECCost);//Fix needed to make equal to BHECCost...
             Debug.Log("BHT Requesting EC");
+            return part.RequestResource(res, BHECCost);//Fix needed to make equal to BHECCost...
         }
         
         private bool Fuel2Active(bool fuel2State)
@@ -105,7 +105,6 @@ namespace BHTKSP
             {
                 return fuel2State = true;
             }
-            Debug.Log("BHT var Fuel2Active set" + fuel2State);
         }
 
         public void Start()
@@ -114,11 +113,17 @@ namespace BHTKSP
             {
                 fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
                 fuel1MaxAmount = fuel1LastAmount;
-
+                Debug.Log("BHT Scene is flight, BHT has gotten fuel1 values");
+                fuel1Amount = 0.0;
+                Debug.Log("BHT Fuel1 amount set to 0.0, BH off");
                 if (FuelTypes == 2)
                 {
                     Fuel2Active(true);
+                    fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
                     fuel2MaxAmount = fuel2LastAmount;
+                    Debug.Log("BHT has gotten fuel2 values");
+                    fuel2Amount = 0.0;
+                    Debug.Log("BHT Fuel2 amount set to 0.0, BH off");
                 }
                 else
                 {
@@ -158,6 +163,7 @@ namespace BHTKSP
                         if (fuel1Amount == 0.0)
                         {
                             BlackHoleEnabled = false;
+                            Debug.Log("BHT Black Hole is off porque fuel is out");
                         }
                         else
                         {
@@ -178,7 +184,7 @@ namespace BHTKSP
                         if (fuel1Amount == 0 && fuel2Amount == 0)
                         {
                             BlackHoleEnabled = false;
-                            BHECCost = 0;
+                            Debug.Log("BHT Black Hole is off porque fuel 1 and 2 are out");
                             return;
                         }
                         else
