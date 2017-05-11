@@ -21,9 +21,6 @@ namespace BHTKSP
         public string Fuel1Name;
 
         [KSPField(isPersistant = false)]
-        public bool Fuel2Active;
-
-        [KSPField(isPersistant = false)]
         public string Fuel2Name;
 
         //Last timestamp the BH was activated
@@ -96,6 +93,19 @@ namespace BHTKSP
         {
             return part.RequestResource(res, BHECCost);//Fix needed to make equal to BHECCost...
             Debug.Log("BHT Requesting EC");
+        }
+        
+        private bool Fuel2Active()
+        {
+            if(FuelTypes == 1)
+            {
+                Fuel2Active = false;
+            }
+            else
+            {
+                Fuel2Active = true;
+            }
+            Debug.Log("BHT var Fuel2Active set"+Fuel2Active)
         }
 
         public void Start()
