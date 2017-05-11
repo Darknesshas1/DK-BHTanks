@@ -1,5 +1,0 @@
-ResourceDisplay (KSP.UI.Screens)
-ResourceDisplayOptions (KSP.UI.Screens)
-
-PartResource
-PartResourceList
