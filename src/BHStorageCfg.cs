@@ -44,18 +44,18 @@ namespace BHTKSP
         private double fuel2LastAmount = 0.0f;
 
         [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
-        public string BlackHoleStatus = "N/A";
+        public string BlackHoleStatus;
 
         //RIP magic var, you served us well
 
-        [KSPEvent(guiActive = true, guiName = "Activate Black Hole", active = true)]
+        [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
         public void Enable()
         {
             BlackHoleEnabled = true;
             
         }
 
-        [KSPEvent(guiActive = true, guiName = "Deactivate Black Hole", active = true)]
+        [KSPEvent(guiActive = false, guiName = "Deactivate Black Hole", active = true)]
         public void Disable()
         {
             BlackHoleEnabled = false;
@@ -163,6 +163,7 @@ namespace BHTKSP
                 {
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     if (BlackHoleEnabled == true)
+                        BlackHoleStatus = "Enabled";
                         if (fuel1Amount == 0.0)
                         {
                             BlackHoleEnabled = false;
@@ -175,6 +176,7 @@ namespace BHTKSP
                         }
                     else
                     {
+                        BlackHoleStatus = "Disabled";
                         fuel1LastAmount = GetResourceAmount(Fuel1Name);
                         fuel1Amount = 0;
                     }
@@ -184,10 +186,12 @@ namespace BHTKSP
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     fuel2Amount = GetResourceAmount(Fuel2Name);
                     if (BlackHoleEnabled == true)
+                        BlackHoleStatus = "Enabled";
                         if (fuel1Amount == 0 && fuel2Amount == 0)
                         {
                             BlackHoleEnabled = false;
                             Debug.Log("BHT Black Hole is off porque fuel 1 and 2 are out");
+                            BlackHoleStatus = "Disabled";
                             return;
                         }
                         else
@@ -198,6 +202,7 @@ namespace BHTKSP
                         }
                     else
                     {
+                        BlackHoleStatus = "Disabled";
                         fuel1LastAmount = GetResourceAmount(Fuel1Name);
                         fuel2LastAmount = GetResourceAmount(Fuel2Name);
                         fuel1Amount = fuel2Amount = 0;
