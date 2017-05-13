@@ -52,6 +52,7 @@ namespace BHTKSP
         public void Enable()
         {
             BlackHoleEnabled = true;
+            
         }
 
         [KSPEvent(guiActive = true, guiName = "Deactivate Black Hole", active = true)]
@@ -88,6 +89,8 @@ namespace BHTKSP
             return res.maxAmount;
         }
         //Thanks Nertea!!!
+        
+        
 
         private double Req(string res)
         {
@@ -114,7 +117,7 @@ namespace BHTKSP
                 fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
                 fuel1MaxAmount = fuel1LastAmount;
                 Debug.Log("BHT Scene is flight, BHT has gotten fuel1 values");
-                fuel1Amount = 0.0;
+
                 Debug.Log("BHT Fuel1 amount set to 0.0, BH off");
                 if (FuelTypes == 2)
                 {
@@ -122,7 +125,7 @@ namespace BHTKSP
                     fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
                     fuel2MaxAmount = fuel2LastAmount;
                     Debug.Log("BHT has gotten fuel2 values");
-                    fuel2Amount = 0.0;
+                    
                     Debug.Log("BHT Fuel2 amount set to 0.0, BH off");
                 }
                 else
