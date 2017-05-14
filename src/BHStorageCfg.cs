@@ -3,6 +3,12 @@ This plugin is meant to shut off fuel supplies when ElectricCharge is not applie
 Credit goes to DarkenessHassFallen, LinuxGuruGamer, and Benjamin Kerman on the Kerbal Space Program Forums
 */
 
+/*
+ * Things to do: 
+ *      Check the API documentation for fixing the fuel set values
+ *      Implement ^^^
+ */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +67,12 @@ namespace BHTKSP
             BlackHoleEnabled = false;
         }
 
+        [KSPEvent(guiActive = true, guiName = "Toggle Black Hole", active = true)]
+        public void ToggleBH()
+        {
+            BlackHoleEnabled = !BlackHoleEnabled;
+        }
+
         //Actions
         [KSPAction("Activate Black Hole")]
         public void EnableAction(KSPActionParam param) { Enable(); }
@@ -69,10 +81,7 @@ namespace BHTKSP
         public void DisableAction(KSPActionParam param) { Disable(); }
 
         [KSPAction("Toggle Black Hole")]
-        public void ToggleResourcesAction(KSPActionParam param)
-        {
-            BlackHoleEnabled = !BlackHoleEnabled;
-        }
+        public void ToggleResourcesAction(KSPActionParam param) { ToggleBH(); }
 
         //Credit for the next two sections goes to Nertea, used with his permission.
         protected double GetResourceAmount(string nm)
@@ -163,6 +172,7 @@ namespace BHTKSP
                 {
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     if (BlackHoleEnabled == true)
+                    {
                         BlackHoleStatus = "Enabled";
                         if (fuel1Amount == 0.0)
                         {
@@ -174,6 +184,7 @@ namespace BHTKSP
                             fuel1Amount = fuel1LastAmount;
                             ConsumeCharge();
                         }
+                    }
                     else
                     {
                         BlackHoleStatus = "Disabled";
@@ -186,6 +197,7 @@ namespace BHTKSP
                     fuel1Amount = GetResourceAmount(Fuel1Name);
                     fuel2Amount = GetResourceAmount(Fuel2Name);
                     if (BlackHoleEnabled == true)
+                    {
                         BlackHoleStatus = "Enabled";
                         if (fuel1Amount == 0 && fuel2Amount == 0)
                         {
@@ -200,6 +212,7 @@ namespace BHTKSP
                             fuel2Amount = fuel2LastAmount;
                             ConsumeCharge();
                         }
+                    }
                     else
                     {
                         BlackHoleStatus = "Disabled";
