@@ -98,7 +98,6 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
         
-        
 
         private double Req(string res)
         {
@@ -125,7 +124,8 @@ namespace BHTKSP
                 fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
                 fuel1MaxAmount = fuel1LastAmount;
                 Debug.Log("BHT Scene is flight, BHT has gotten fuel1 values");
-                PartResourceList.Remove(Fuel1Name); //Removing fuel from tank
+                PartResourceList.Remove(Fuel1Name) = true; //Removing fuel from tank
+                //Need help with this
                 Debug.Log("BHT Fuel1 amount set to 0.0, BH off");
                 if (FuelTypes == 2)
                 {
