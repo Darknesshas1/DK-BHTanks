@@ -124,7 +124,7 @@ namespace BHTKSP
                 fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
                 fuel1MaxAmount = fuel1LastAmount;
                 Debug.Log("BHT Scene is flight, BHT has gotten fuel1 values");
-                public bool Remove(Fuel1Name); //Removing fuel from tank
+                PartResourceList.Remove(Fuel1Name); //Removing fuel from tank
                 //Need help with this. Create a variable up top, or is inline ok?
                 Debug.Log("BHT Fuel1 amount set to 0.0, BH off");
                 if (FuelTypes == 2)
@@ -133,7 +133,7 @@ namespace BHTKSP
                     fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
                     fuel2MaxAmount = fuel2LastAmount;
                     Debug.Log("BHT has gotten fuel2 values");
-                    public bool Remove(Fuel2Name); //Removing fuel from tank
+                    PartResourceList.Remove(Fuel2Name); //Removing fuel from tank
                     Debug.Log("BHT Fuel2 amount set to 0.0, BH off");
                 }
                 else
