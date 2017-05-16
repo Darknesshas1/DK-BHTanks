@@ -98,6 +98,28 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
         
+        //Will add mass to the tanks, and how do I activate it?
+        public float GetModuleMass(float defaultMass, ModifierStagingSituation sit) //Used to add weight to the tanks
+        {
+            if(Fuel1Name = "LiquidFuel" || Fuel1Name = "Oxidizer" || Fuel2Name = "LiquidFuel" || Fuel2Name = "Oxidizer")
+            {
+                if(Fuel2Active = false)
+                {
+                    return Fuel1LastAmount/200;
+                }
+                else
+                {
+                    private float FuelBothLastAmount = Fuel1LastAmount+Fuel2LastAmount;
+                    return FuelBothLastAmount/200;
+                }
+            }
+            else(Fuel1Name = "Ore" && Fuel2Active = false)
+            {
+                return Fuel1LastAmount/100;
+            }
+        }
+           
+        
         private double Req(string res)
         {
             Debug.Log("BHT Requesting EC");
@@ -125,6 +147,7 @@ namespace BHTKSP
                 Debug.Log("BHT Scene is flight, BHT has gotten fuel1 values");
                 part.Resources.Remove(Fuel1Name); //Removing fuel from tank
                 Debug.Log("BHT Fuel1 amount set to 0.0, BH off");
+                part.
                 if (FuelTypes == 2)
                 {
                     Fuel2Active(true);
