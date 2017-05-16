@@ -98,11 +98,6 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
         
-        public bool PartResouceList.Remove(string resName)
-        {
-            return resName; //Temp, fix for Fuel2 later
-        }
-
         private double Req(string res)
         {
             Debug.Log("BHT Requesting EC");
@@ -129,7 +124,6 @@ namespace BHTKSP
                 fuel1MaxAmount = fuel1LastAmount;
                 Debug.Log("BHT Scene is flight, BHT has gotten fuel1 values");
                 part.Resources.Remove(Fuel1Name); //Removing fuel from tank
-                //Need help with this. Create a variable up top, or is inline ok?
                 Debug.Log("BHT Fuel1 amount set to 0.0, BH off");
                 if (FuelTypes == 2)
                 {
@@ -156,11 +150,8 @@ namespace BHTKSP
                 {
                     double elapsedTime = part.vessel.missionTime - LastUpdateTime;
                     Debug.Log("BHT Now doing catchup");
-                    part.RequestResource(Fuel1Name, BHECCost * elapsedTime);//For fuel 1
-                    if(Fuel2Active(true))
-                    {
-                        part.RequestResource(Fuel2Name, BHECCost * elapsedTime);//Only happens if Fuel2 is active
-                    }
+                    part.RequestResource("ElectricCharge", BHECCost * elapsedTime);//For fuel 1
+                    //No need for another request because of fuel2, just makes it double the cost
                 }
             }
         }
