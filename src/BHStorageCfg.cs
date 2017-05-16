@@ -98,6 +98,10 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
         
+        public bool PartResouceList.Remove(string resName)
+        {
+            return resName; //Temp, fix for Fuel2 later
+        }
 
         private double Req(string res)
         {
