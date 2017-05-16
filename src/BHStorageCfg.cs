@@ -42,12 +42,12 @@ namespace BHTKSP
         public static double BHECCost = 0.0f;
 
         //Private Values
-        private double fuel1Amount = 0.0f;
-        private double fuel2Amount = 0.0f;
-        private double fuel1MaxAmount = 0.0f;
-        private double fuel1LastAmount = 0.0f;
-        private double fuel2MaxAmount = 0.0f;
-        private double fuel2LastAmount = 0.0f;
+        private float fuel1Amount = 0.0f;
+        private float fuel2Amount = 0.0f;
+        private float fuel1MaxAmount = 0.0f;
+        private float fuel1LastAmount = 0.0f;
+        private float fuel2MaxAmount = 0.0f;
+        private float fuel2LastAmount = 0.0f;
 
         [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus;
@@ -97,35 +97,52 @@ namespace BHTKSP
             return res.maxAmount;
         }
         //Thanks Nertea!!!
-        
-        //Will add mass to the tanks, and how do I activate it?
-        public float GetModuleMass(float defaultMass, ModifierStagingSituation sit) //Used to add weight to the tanks
-        {
-            if(Fuel1Name = "LiquidFuel" || Fuel1Name = "Oxidizer" || Fuel2Name = "LiquidFuel" || Fuel2Name = "Oxidizer")
-            {
-                if(Fuel2Active = false)
+
+        /*
+         * if (Fuel2Active = false)
                 {
-                    return Fuel1LastAmount/200;
+                    return fuel1LastAmount / 200;
                 }
                 else
                 {
-                    private float FuelBothLastAmount = Fuel1LastAmount+Fuel2LastAmount;
-                    return FuelBothLastAmount/200;
+                    float FuelBothLastAmount = fuel1LastAmount + fuel2LastAmount;
+                    return FuelBothLastAmount / 200;
+                }
+        */
+
+
+        //Will add mass to the tanks, and how do I activate it?
+        public float GetModuleMass(float defaultMass, ModifierStagingSituation sit) //Used to add weight to the tanks
+        {
+            if (Fuel1Name == "LiquidFuel", Fuel1Name == "Oxidizer", Fuel2Name == "LiquidFuel", Fuel2Name == "Oxidizer")
+            {
+                if (Fuel2Active = false)
+                {
+                    return fuel1LastAmount / 200;
+                }
+                else
+                {
+                    double FuelBothLastAmount = fuel1LastAmount + fuel2LastAmount;
+                    return FuelBothLastAmount / 200;
                 }
             }
-            else(Fuel1Name = "Ore" && Fuel2Active = false)
+            else if(Fuel1Name = "Ore" && Fuel2Active = false)
             {
-                return Fuel1LastAmount/100;
+                return fuel1LastAmount / 100;
+            }
+            else
+            {
+                return 0;
             }
         }
-           
-        
+
+
         private double Req(string res)
         {
             Debug.Log("BHT Requesting EC");
             return part.RequestResource(res, BHECCost);//Fix needed to make equal to BHECCost...
         }
-        
+
         private bool Fuel2Active(bool fuel2State)
         {
             if(FuelTypes == 1)
