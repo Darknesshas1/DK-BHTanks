@@ -42,12 +42,12 @@ namespace BHTKSP
         public static double BHECCost = 0.0f;
 
         //Private Values
-        private float fuel1Amount = 0.0f;
-        private float fuel2Amount = 0.0f;
-        private float fuel1MaxAmount = 0.0f;
-        private float fuel1LastAmount = 0.0f;
-        private float fuel2MaxAmount = 0.0f;
-        private float fuel2LastAmount = 0.0f;
+        private double fuel1Amount = 0.0f;
+        private double fuel2Amount = 0.0f;
+        private double fuel1MaxAmount = 0.0f;
+        private double fuel1LastAmount = 0.0f;
+        private double fuel2MaxAmount = 0.0f;
+        private double fuel2LastAmount = 0.0f;
 
         [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus;
@@ -98,25 +98,13 @@ namespace BHTKSP
         }
         //Thanks Nertea!!!
 
-        /*
-         * if (Fuel2Active = false)
-                {
-                    return fuel1LastAmount / 200;
-                }
-                else
-                {
-                    float FuelBothLastAmount = fuel1LastAmount + fuel2LastAmount;
-                    return FuelBothLastAmount / 200;
-                }
-        */
-
-
         //Will add mass to the tanks, and how do I activate it?
         public float GetModuleMass(float defaultMass, ModifierStagingSituation sit) //Used to add weight to the tanks
         {
             if (Fuel1Name == "LiquidFuel", Fuel1Name == "Oxidizer", Fuel2Name == "LiquidFuel", Fuel2Name == "Oxidizer")
+            //^^^ how to make or statement
             {
-                if (Fuel2Active = false)
+                if (Fuel2Active = false)//Isnt able to access Fuel2Active: 
                 {
                     return fuel1LastAmount / 200;
                 }
@@ -125,8 +113,8 @@ namespace BHTKSP
                     double FuelBothLastAmount = fuel1LastAmount + fuel2LastAmount;
                     return FuelBothLastAmount / 200;
                 }
-            }
-            else if(Fuel1Name = "Ore" && Fuel2Active = false)
+            }//Doesnt recingize curly brace...
+            else if(Fuel1Name = "Ore" && Fuel2Active = false) //else if statement has "unreachable code" warning
             {
                 return fuel1LastAmount / 100;
             }
