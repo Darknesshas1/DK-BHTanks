@@ -21,7 +21,7 @@ namespace BHTKSP
     public class ModuleBlackHole : PartModule
     {
         [KSPField(isPersistant = false)]
-        public double FuelTypes; //FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. 
+        public int FuelTypes; //FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. 
 
         [KSPField(isPersistant = false)]
         public string Fuel1Name;
@@ -128,7 +128,7 @@ namespace BHTKSP
                 fuel1MaxAmount = GetMaxResourceAmount(Fuel1Name);
                 fuel1MaxAmount = fuel1LastAmount;
                 Debug.Log("BHT Scene is flight, BHT has gotten fuel1 values");
-                PartResourceList.Remove(Fuel1Name); //Removing fuel from tank
+                part.Resources.Remove(Fuel1Name); //Removing fuel from tank
                 //Need help with this. Create a variable up top, or is inline ok?
                 Debug.Log("BHT Fuel1 amount set to 0.0, BH off");
                 if (FuelTypes == 2)
@@ -137,7 +137,7 @@ namespace BHTKSP
                     fuel2MaxAmount = GetMaxResourceAmount(Fuel2Name);
                     fuel2MaxAmount = fuel2LastAmount;
                     Debug.Log("BHT has gotten fuel2 values");
-                    PartResourceList.Remove(Fuel2Name); //Removing fuel from tank
+                    part.Resources.Remove(Fuel2Name); //Removing fuel from tank
                     Debug.Log("BHT Fuel2 amount set to 0.0, BH off");
                 }
                 else
