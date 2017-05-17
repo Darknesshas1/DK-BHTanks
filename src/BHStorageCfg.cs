@@ -227,7 +227,7 @@ namespace BHTKSP
 
         //Got rid of public void Update, uneeded, as we don't have a custom GUI.
 
-        protected void FixedUpdate()//If needed this can be Update()... I think...
+        public void Update()//If needed this can be Update()... I think...
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
