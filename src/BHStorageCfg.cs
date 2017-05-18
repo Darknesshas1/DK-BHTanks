@@ -83,18 +83,23 @@ namespace BHTKSP
         public void ToggleResourcesAction(KSPActionParam param) { ToggleBH(); }
 
         //Credit for the next two sections goes to Nertea, used with his permission.
-        protected double GetResourceAmount(string nm)
+        public double GetResourceAmount(string nm)
         {
-            PartResource res = this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id);
-            return res.amount;
+          if (this.part.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
+            return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
+          else
+            return 0.0;
         }
-        protected double GetMaxResourceAmount(string nm)
+        public double GetResourceAmount(string nm,bool max)
         {
-            int id = PartResourceLibrary.Instance.GetDefinition(nm).id;
+            if (max)
+                if (this.part.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
+                  return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).maxAmount;
+                else
+                  return 0.0;
 
-            PartResource res = this.part.Resources.Get(id);
-
-            return res.maxAmount;
+            else
+                return GetResourceAmount(nm);
         }
         //Thanks Nertea!!!
 
