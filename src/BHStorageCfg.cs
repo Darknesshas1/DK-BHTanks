@@ -36,6 +36,9 @@ namespace BHTKSP
         //Whether or not BH is active
         [KSPField(isPersistant = true)]
         public bool BlackHoleEnabled = false; //This statement is also used for the EC draw, as you can't have one true without the other.
+        
+        [KSPField(isPersistant = true)]
+        public bool BlackHoleRefueling = false;
 
         //EC cost to keep fuel accessible
         [KSPField(isPersistant = false)]
@@ -71,7 +74,29 @@ namespace BHTKSP
         {
             BlackHoleEnabled = !BlackHoleEnabled;
         }
-
+        
+        [KSPEvent(guiActive = true, guiName = "Refuel Tank", active = true)]
+        public void Refuel()
+        {
+            if (BlackHoleRefueling = true)
+            {
+                BlackHoleEnabled = false;
+                //Add function to be able to add fuel without being able to pull out. 
+                if (Fuel2Active(false))
+                {
+                    part.Resources.Add(Fuel1Name, FloatToDouble(fuel1LastAmount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
+                    //Need to put MassAdding in here
+                }
+                else
+                {
+                    part.Resources.Add(Fuel1Name, FloatToDouble(fuel1LastAmount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
+                    part.Resources.Add(Fuel2Name, FloatToDouble(fuel2LastAmount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
+                }
+            }
+        }
+                
+                
+            
         //Actions
         [KSPAction("Activate Black Hole")]
         public void EnableAction(KSPActionParam param) { Enable(); }
@@ -81,6 +106,9 @@ namespace BHTKSP
 
         [KSPAction("Toggle Black Hole")]
         public void ToggleResourcesAction(KSPActionParam param) { ToggleBH(); }
+        
+        [KSPAction("Refuel Black Hole")]
+        public void RefuelAction(KSPActionParam param) { Refuel(); }
 
         //Credit for the next two sections goes to Nertea, used with his permission.
         public double GetResourceAmount(string nm)
@@ -97,7 +125,6 @@ namespace BHTKSP
                   return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).maxAmount;
                 else
                   return 0.0;
-
             else
                 return GetResourceAmount(nm);
         }
@@ -191,7 +218,7 @@ namespace BHTKSP
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
-                fuel1MaxAmount = DoubleToFloat(GetMaxResourceAmount(Fuel1Name));
+                fuel1MaxAmount = DoubleToFloat(GetResourceAmount(Fuel1Name, true));
                 fuel1MaxAmount = fuel1LastAmount;
                 fuel1LastAmount = fuel1Amount;
                 Debug.Log("BHT Scene is flight, BHT has gotten Fuel1 values");
@@ -200,7 +227,7 @@ namespace BHTKSP
                 if (FuelTypes == 2)
                 {
                     Fuel2Active(true);
-                    fuel2MaxAmount = DoubleToFloat(GetMaxResourceAmount(Fuel2Name));
+                    fuel2MaxAmount = DoubleToFloat(GetResoureAmount(Fuel2Name, true));
                     fuel2MaxAmount = fuel2LastAmount;
                     fuel2LastAmount = fuel2Amount;
                     Debug.Log("BHT has gotten fuel2 values");
