@@ -55,8 +55,6 @@ namespace BHTKSP
         [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus;
 
-        //RIP magic var, you served us well
-
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
         public void Enable()
         {
@@ -80,7 +78,6 @@ namespace BHTKSP
         {
             if (BlackHoleRefueling == true)
             {
-                BlackHoleEnabled = false;
                 //Add function to be able to add fuel without being able to pull out. 
                 if (Fuel2Active(false))
                 {
@@ -94,8 +91,6 @@ namespace BHTKSP
                 }
             }
         }
-                
-                
             
         //Actions
         [KSPAction("Activate Black Hole")]
@@ -259,7 +254,7 @@ namespace BHTKSP
 
         //Got rid of public void Update, uneeded, as we don't have a custom GUI.
 
-        public void Update()//If needed this can be Update()... I think...
+        public void FixedUpdate()//If needed this can be Update()... I think...
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
