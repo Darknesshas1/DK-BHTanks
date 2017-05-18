@@ -78,7 +78,7 @@ namespace BHTKSP
         [KSPEvent(guiActive = true, guiName = "Refuel Tank", active = true)]
         public void Refuel()
         {
-            if (BlackHoleRefueling = true)
+            if (BlackHoleRefueling == true)
             {
                 BlackHoleEnabled = false;
                 //Add function to be able to add fuel without being able to pull out. 
@@ -113,7 +113,7 @@ namespace BHTKSP
         //Credit for the next two sections goes to Nertea, used with his permission.
         public double GetResourceAmount(string nm)
         {
-          if (this.part.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
+          if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
             return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
           else
             return 0.0;
@@ -121,7 +121,7 @@ namespace BHTKSP
         public double GetResourceAmount(string nm,bool max)
         {
             if (max)
-                if (this.part.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
+                if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
                   return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).maxAmount;
                 else
                   return 0.0;
@@ -227,7 +227,7 @@ namespace BHTKSP
                 if (FuelTypes == 2)
                 {
                     Fuel2Active(true);
-                    fuel2MaxAmount = DoubleToFloat(GetResoureAmount(Fuel2Name, true));
+                    fuel2MaxAmount = DoubleToFloat(GetResourceAmount(Fuel2Name, true));
                     fuel2MaxAmount = fuel2LastAmount;
                     fuel2LastAmount = fuel2Amount;
                     Debug.Log("BHT has gotten fuel2 values");
