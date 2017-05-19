@@ -230,20 +230,6 @@ namespace BHTKSP
             }
         }
 
-        public void DoCatchup() //For timewarping and on load after launch
-        {
-            if (part.vessel.missionTime > 0.0)
-            {
-                if (part.RequestResource("ElectricCharge", BHECCost * TimeWarp.fixedDeltaTime) < BHECCost * TimeWarp.fixedDeltaTime)
-                {
-                    double elapsedTime = part.vessel.missionTime - LastUpdateTime;
-                    Debug.Log("BHT Now doing catchup");
-                    part.RequestResource("ElectricCharge", BHECCost * elapsedTime);
-                    //No need for another request because of fuel2, otherwise it would just be double the cost
-                }
-            }
-        }
-
         //Got rid of public void Update, uneeded, as we don't have a custom GUI.
 
         public void FixedUpdate()//If needed this can be Update()... I think...
@@ -317,7 +303,7 @@ namespace BHTKSP
                             fuel1Amount = DoubleToFloat(GetResourceAmount(Fuel1Name));
                             part.Resources.Remove(Fuel1Name);
                         }
-                        else if (part.Resources.Contains(Fuel2Name))
+                        if (part.Resources.Contains(Fuel2Name))
                         {
                             fuel2Amount = DoubleToFloat(GetResourceAmount(Fuel2Name));
                             part.Resources.Remove(Fuel2Name);
@@ -390,5 +376,20 @@ namespace BHTKSP
             }
             else { DoCatchup(); }
         }
+        
+        public void DoCatchup() //For timewarping and on load after launch
+        {
+            if (part.vessel.missionTime > 0.0)
+            {
+                if (part.RequestResource("ElectricCharge", BHECCost * TimeWarp.fixedDeltaTime) < BHECCost * TimeWarp.fixedDeltaTime)
+                {
+                    double elapsedTime = part.vessel.missionTime - LastUpdateTime;
+                    Debug.Log("BHT Now doing catchup");
+                    part.RequestResource("ElectricCharge", BHECCost * elapsedTime);
+                    //No need for another request because of fuel2, otherwise it would just be double the cost
+                }
+            }
+        }
     }
 }
+
