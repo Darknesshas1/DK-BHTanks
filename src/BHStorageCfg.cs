@@ -217,8 +217,6 @@ namespace BHTKSP
                 fuel1MaxAmount = fuel1LastAmount;
                 fuel1LastAmount = fuel1Amount;
                 Debug.Log("BHT Scene is flight, BHT has gotten Fuel1 values");
-                part.Resources.Remove(Fuel1Name); //Removing fuel from tank
-                Debug.Log("BHT Fuel1 removed, BH off");
                 if (FuelTypes == 2)
                 {
                     Fuel2Active(true);
@@ -226,8 +224,6 @@ namespace BHTKSP
                     fuel2MaxAmount = fuel2LastAmount;
                     fuel2LastAmount = fuel2Amount;
                     Debug.Log("BHT has gotten fuel2 values");
-                    part.Resources.Remove(Fuel2Name); //Removing fuel from tank
-                    Debug.Log("BHT Fuel2 removed, BH off");
                 }
                 else
                 {
