@@ -30,13 +30,6 @@ C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTa
 C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Release\ClassLibrary.pdb
 C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\ClassLibrary.dll
 C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\ClassLibrary.pdb
-C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\Assembly-CSharp-firstpass.dll
-C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\TrackIRUnity.dll
-C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\UnityEngine.UI.dll
-C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\KSPAssets.dll
-C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\Mono.Cecil.dll
-C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\TDx.TDxInput.dll
-C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\bin\Release\UnityEngine.xml
 C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\obj\Release\Black Hole Plugin.csprojResolveAssemblyReference.cache
 C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\obj\Release\ClassLibrary.dll
 C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\obj\Release\ClassLibrary.pdb
