@@ -38,3 +38,13 @@ C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\obj\Release\ClassLibrary.dll
 C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\obj\Release\ClassLibrary.pdb
 C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\ClassLibrary.dll
 C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\ClassLibrary.pdb
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\Assembly-CSharp.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\UnityEngine.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\Assembly-CSharp-firstpass.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\TrackIRUnity.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\UnityEngine.UI.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\KSPAssets.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\Mono.Cecil.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\TDx.TDxInput.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\Mono.Security.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\bin\Release\UnityEngine.xml

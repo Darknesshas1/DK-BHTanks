@@ -98,13 +98,13 @@ namespace BHTKSP
         public void RefuelAction(KSPActionParam param) { Refuel(); }
 
         //Credit for the next two sections goes to Nertea, used with his permission.
-            public double GetResourceAmount(string nm)
-            {
-                if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
-                    return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
-                else
-                    return 0.0;
-            }
+        public double GetResourceAmount(string nm)
+        {
+            if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
+                return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
+            else
+                return 0.0;
+        }
         public double GetResourceAmount(string nm, bool max)
         {
             if (max)
@@ -191,7 +191,7 @@ namespace BHTKSP
         private bool Fuel2Active()
         {
             Debug.Log("[BHT]52");
-            if (part.Resources.Get(PartResourceLibrary.Instance.
+            if (((part.Resources.Contains("LiquidFuel")) && !(part.Resources.Contains("Oxidizer"))) || (part.Resources.Contains("Ore")) || (part.Resources.Contains("XenonGas")) || (part.Resources.Contains("LiquidFuel")))
             {
                 Debug.Log("[BHT]53");
                 return false;
@@ -269,12 +269,28 @@ namespace BHTKSP
             }
         }
 
+        private void FuelTypesGetter()
+        {
+            PartResource[] GetResourceList(PartResourceList resourceList)
+            {
+                DictionaryValueList<int, PartResource> prl = resourceList.dict;
+                PartResource[] resources = new PartResource[prl.Count];
+                prl.Values.CopyTo(resources, 0);
+                return resources;
+            }
+            Debug.Log("[BHT]55");
+        }
+
         //Runs on launch of vessel
         public void Start()
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
                 
+                if (Fuel2Active() == true)
+                {
+                    FuelTypes = 2;
+                }
                 fuel1MaxAmount = DoubleToFloat(GetResourceAmount(Fuel1Name, true));
                 fuel1Amount = DoubleToFloat(GetResourceAmount(Fuel1Name));
                 Debug.Log("[BHT]0");
