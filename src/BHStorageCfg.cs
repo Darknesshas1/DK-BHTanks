@@ -286,7 +286,8 @@ namespace BHTKSP
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
-                
+                PartResource[] res = GetResourceList(/*your PartResourceList here*/);
+                Fuel1Name = res[0].resourceName;
                 if (Fuel2Active() == true)
                 {
                     FuelTypes = 2;
@@ -296,7 +297,7 @@ namespace BHTKSP
                 Debug.Log("[BHT]0");
                 if (FuelTypes == 2)
                 {
-
+                    Fuel2Name = res[1].resourceName;
                     fuel2MaxAmount = DoubleToFloat(GetResourceAmount(Fuel2Name, true));
                     fuel2Amount = DoubleToFloat(GetResourceAmount(Fuel2Name));
                     Debug.Log("[BHT]0.1");
