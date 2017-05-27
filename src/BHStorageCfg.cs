@@ -20,13 +20,13 @@ namespace BHTKSP
 {
     public class ModuleBlackHole : PartModule
     {
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public int FuelTypes; //FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. 
 
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public string Fuel1Name;
 
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public string Fuel2Name;
 
         //Last timestamp the BH was activated
@@ -45,9 +45,16 @@ namespace BHTKSP
         public static double BHECCost = 0.0f;
 
         //Private Values
+        [KSPField]
         private float fuel1Amount = 0.0f;
+
+        [KSPField]
         private float fuel2Amount = 0.0f;
+
+        [KSPField]
         private float fuel1MaxAmount = 0.0f;
+
+        [KSPField]
         private float fuel2MaxAmount = 0.0f;
 
         [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
@@ -91,13 +98,13 @@ namespace BHTKSP
         public void RefuelAction(KSPActionParam param) { Refuel(); }
 
         //Credit for the next two sections goes to Nertea, used with his permission.
-        public double GetResourceAmount(string nm)
-        {
-            if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
-                return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
-            else
-                return 0.0;
-        }
+            public double GetResourceAmount(string nm)
+            {
+                if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
+                    return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
+                else
+                    return 0.0;
+            }
         public double GetResourceAmount(string nm, bool max)
         {
             if (max)
@@ -184,7 +191,7 @@ namespace BHTKSP
         private bool Fuel2Active()
         {
             Debug.Log("[BHT]52");
-            if (FuelTypes == 1)
+            if (part.Resources.Get(PartResourceLibrary.Instance.
             {
                 Debug.Log("[BHT]53");
                 return false;
@@ -267,11 +274,13 @@ namespace BHTKSP
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
+                
                 fuel1MaxAmount = DoubleToFloat(GetResourceAmount(Fuel1Name, true));
                 fuel1Amount = DoubleToFloat(GetResourceAmount(Fuel1Name));
                 Debug.Log("[BHT]0");
                 if (FuelTypes == 2)
                 {
+
                     fuel2MaxAmount = DoubleToFloat(GetResourceAmount(Fuel2Name, true));
                     fuel2Amount = DoubleToFloat(GetResourceAmount(Fuel2Name));
                     Debug.Log("[BHT]0.1");
