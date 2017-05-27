@@ -268,25 +268,22 @@ namespace BHTKSP
                 return present = false;
             }
         }
-
-        private void FuelTypesGetter()
+        
+        PartResource[] GetResourceList(PartResourceList resourceList)
         {
-            PartResource[] GetResourceList(PartResourceList resourceList)
-            {
-                DictionaryValueList<int, PartResource> prl = resourceList.dict;
-                PartResource[] resources = new PartResource[prl.Count];
-                prl.Values.CopyTo(resources, 0);
-                return resources;
-            }
-            Debug.Log("[BHT]55");
+            DictionaryValueList<int, PartResource> prl = resourceList.dict;
+            PartResource[] resources = new PartResource[prl.Count];
+            prl.Values.CopyTo(resources, 0);
+            return resources;
         }
-
+        
         //Runs on launch of vessel
         public void Start()
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
-                PartResource[] res = GetResourceList(/*your PartResourceList here*/);
+                PartResourceList BHT = this.part.Resources;
+                PartResource[] res = GetResourceList(BHT);
                 Fuel1Name = res[0].resourceName;
                 if (Fuel2Active() == true)
                 {
