@@ -57,7 +57,7 @@ namespace BHTKSP
         [KSPField]
         private float fuel2MaxAmount = 0.0f;
 
-        [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
+        [KSPField(isPersistant = true, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus;
 
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
