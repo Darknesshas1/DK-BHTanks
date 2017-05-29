@@ -63,7 +63,7 @@ namespace BHTKSP
         [KSPField(isPersistant = true, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus;
 
-        private object cNode;
+        private ConfigNode cNode;
 
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
         public void Enable()
@@ -254,7 +254,7 @@ namespace BHTKSP
 
         private double GetCfgInfo(string NodeName)
         {
-            return double.Parse(ConfigNode.cNode.GetNode(s).GetValues(NodeName)[0]);
+            return double.Parse(cNode.GetNode(s).GetValues(NodeName)[0]);
         }
         
         //Runs on launch of vessel
