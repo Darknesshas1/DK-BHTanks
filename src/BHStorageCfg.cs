@@ -287,10 +287,10 @@ namespace BHTKSP
             return resources;
         }
         
-        private void GetCfgInfo()
+        private void GetCfgInfo(string NodeName)
         {
-            BHECCost = cNode.GetNodes("ModuleBlackHole").GetValues("BHECCost");
-            return;
+            BHECCost = cNode.GetNodes("ModuleBlackHole").GetValues(NodeName);
+            return NodeName;
         }
         
         //Runs on launch of vessel
