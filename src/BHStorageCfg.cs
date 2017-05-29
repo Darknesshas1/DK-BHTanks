@@ -41,7 +41,7 @@ namespace BHTKSP
         public bool BlackHoleRefueling = false;
 
         //EC cost to keep fuel accessible
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public static double BHECCost = 0.0f;
 
         //Private Values
@@ -287,11 +287,18 @@ namespace BHTKSP
             return resources;
         }
         
+        private void GetCfgInfo()
+        {
+            BHECCost = cNode.GetNodes("ModuleBlackHole").GetValues("BHECCost");
+            return;
+        }
+        
         //Runs on launch of vessel
         public void Start()
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
+                GetCfgInfo();
                 PartResourceList BHT = this.part.Resources;
                 PartResource[] res = GetResourceList(BHT);
                 Fuel1Name = res[0].resourceName;
