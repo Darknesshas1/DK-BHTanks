@@ -212,49 +212,7 @@ namespace BHTKSP
                 return true;
             }
         }
-
-        private void BHRefuel()
-        {
-            Debug.Log("[BHT]41");
-            if (BlackHoleRefueling == true)
-            {
-                Debug.Log("[BHT]42");
-                //Add function to be able to add fuel without being able to pull out. 
-                if (Fuel2Active(false))
-                {
-                    Debug.Log("[BHT]43");
-                    if (Fuel1Present(true)) { Debug.Log("[BHT]44"); }
-                    //Need to put MassAdding in here
-                    else
-                    {
-                        Debug.Log("[BHT]45");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                }
-                else
-                {
-                    Debug.Log("[BHT]46");
-                    if ((Fuel2Present(true)) && (Fuel1Present(true))) { Debug.Log("[BHT]47"); }
-                    else if ((Fuel1Present(true)) && (Fuel2Present(false)))
-                    {
-                        Debug.Log("[BHT]48");
-                        part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                    else if ((Fuel1Present(false)) && (Fuel2Present(true)))
-                    {
-                        Debug.Log("[BHT]49");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                    else
-                    {
-                        Debug.Log("[BHT]50");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                        part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                }
-            }
-        }
-
+        
         private bool Fuel1Present(bool present)
         {
             if (part.Resources.Contains(Fuel1Name))
