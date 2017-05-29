@@ -64,7 +64,8 @@ namespace BHTKSP
         public string BlackHoleStatus;
 
         private ConfigNode cNode;
-
+        private string blackHoleModule = "ModuleBlackHole";
+        
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
         public void Enable()
         {
@@ -250,11 +251,9 @@ namespace BHTKSP
             return resources;
         }
 
-        private string s = "ModuleBlackHole";
-
         private double GetCfgInfo(string NodeName)
         {
-            return double.Parse(cNode.GetNode(s).GetValues(NodeName)[0]);
+            return double.Parse(cNode.GetNode(blackHoleModule).GetValues(NodeName)[0]);
         }
         
         //Runs on launch of vessel
