@@ -44,6 +44,9 @@ namespace BHTKSP
         [KSPField(isPersistant = true)]
         public static double BHECCost = 0.0f;
 
+        [KSPField]
+        public static string ECCost;
+
         //Private Values
         [KSPField]
         private float fuel1Amount = 0.0f;
@@ -59,6 +62,7 @@ namespace BHTKSP
 
         [KSPField(isPersistant = true, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus;
+        private object cNode;
 
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
         public void Enable()
@@ -247,7 +251,7 @@ namespace BHTKSP
         
         private double GetCfgInfo(string NodeName)
         {
-            return double.Parse(cNode.GetNodes("ModuleBlackHole").GetValues(NodeName)[0]);
+            return double.Parse(cNode.GetNode("ModuleBlackHole").GetValues(NodeName)[0]);
         }
         
         //Runs on launch of vessel
@@ -255,7 +259,7 @@ namespace BHTKSP
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
-                GetCfgInfo(BHECCost);
+                BHECCost = GetCfgInfo(ECCost);
                 PartResourceList BHT = this.part.Resources;
                 PartResource[] res = GetResourceList(BHT);
                 Fuel1Name = res[0].resourceName;
