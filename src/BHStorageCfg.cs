@@ -245,10 +245,9 @@ namespace BHTKSP
             return resources;
         }
         
-        private void GetCfgInfo(string NodeName)
+        private double GetCfgInfo(string NodeName)
         {
-            BHECCost = cNode.GetNodes("ModuleBlackHole").GetValues(NodeName);
-            return NodeName;
+            return double.Parse(cNode.GetNodes("ModuleBlackHole").GetValues(NodeName)[0]);
         }
         
         //Runs on launch of vessel
@@ -256,7 +255,7 @@ namespace BHTKSP
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
-                GetCfgInfo();
+                GetCfgInfo(BHECCost);
                 PartResourceList BHT = this.part.Resources;
                 PartResource[] res = GetResourceList(BHT);
                 Fuel1Name = res[0].resourceName;
