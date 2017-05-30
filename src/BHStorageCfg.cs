@@ -20,10 +20,14 @@ namespace BHTKSP
 {
     public class ModuleBlackHole : PartModule
     {
+<<<<<<< HEAD
         [KSPField(isPersistant = true)]
         public int FuelTypes; //FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. 
 
         [KSPField(isPersistant = true)]
+=======
+        [KSPField(isPersistant = true)]//Got rid of fuelTypes, because we already have bool Fuel2Active()
+>>>>>>> 0e409f93c3e750b76633fc79f71349f4fc8caef7
         public string Fuel1Name;
 
         [KSPField(isPersistant = true)]
@@ -41,18 +45,32 @@ namespace BHTKSP
         public bool BlackHoleRefueling = false;
 
         //EC cost to keep fuel accessible
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public static double BHECCost = 0.0f;
 
+        [KSPField]
+        public static string ECCost;
+
         //Private Values
+        [KSPField]
         private float fuel1Amount = 0.0f;
+
+        [KSPField]
         private float fuel2Amount = 0.0f;
+
+        [KSPField]
         private float fuel1MaxAmount = 0.0f;
+
+        [KSPField]
         private float fuel2MaxAmount = 0.0f;
 
-        [KSPField(isPersistant = false, guiActive = true, guiName = "Black Hole")]
+        [KSPField(isPersistant = true, guiActive = true, guiName = "Black Hole")]
         public string BlackHoleStatus;
 
+        private ConfigNode cNode = null;
+
+        private string blackHoleModule = "ModuleBlackHole";
+        
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
         public void Enable()
         {
@@ -71,8 +89,20 @@ namespace BHTKSP
             BlackHoleEnabled = !BlackHoleEnabled;
         }
 
-        [KSPEvent(guiActive = true, guiName = "Refuel Tank", active = true)]
-        public void Refuel()
+        [KSPEvent(guiActive = true, guiName = "Start Refueling", active = true)]
+        public void StartRefuel()
+        {
+            BlackHoleRefueling = true;
+        }
+
+        [KSPEvent(guiActive = true, guiName = "Stop Refueling", active = true)]
+        public void StopRefuel()
+        {
+            BlackHoleRefueling = false;
+        }
+
+        [KSPEvent(guiActive = true, guiName = "Refuel Tank", active = false)]
+        public void ToggleRefuel()
         {
             BlackHoleRefueling = !BlackHoleRefueling;
         }
@@ -87,24 +117,21 @@ namespace BHTKSP
         [KSPAction("Toggle Black Hole")]
         public void ToggleResourcesAction(KSPActionParam param) { ToggleBH(); }
 
-        [KSPAction("Refuel Black Hole")]
-        public void RefuelAction(KSPActionParam param) { Refuel(); }
+        [KSPAction("Start Refueling")]
+        public void StartRefueling(KSPActionParam param) { StartRefuel(); }
+
+        [KSPAction("Stop Refueling")]
+        public void StopRefueling(KSPActionParam param) { StopRefuel(); }
 
         //Credit for the next two sections goes to Nertea, used with his permission.
         public double GetResourceAmount(string nm)
         {
-            if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
-                return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
-            else
-                return 0.0;
+            return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).amount;
         }
         public double GetResourceAmount(string nm, bool max)
         {
             if (max)
-                if (this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id) != null)
-                    return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).maxAmount;
-                else
-                    return 0.0;
+                return this.part.Resources.Get(PartResourceLibrary.Instance.GetDefinition(nm).id).maxAmount;
             else
                 return GetResourceAmount(nm);
         }
@@ -184,7 +211,7 @@ namespace BHTKSP
         private bool Fuel2Active()
         {
             Debug.Log("[BHT]52");
-            if (FuelTypes == 1)
+            if ((Fuel1Present() == true) && (Fuel2Present() == true))
             {
                 Debug.Log("[BHT]53");
                 return false;
@@ -195,135 +222,71 @@ namespace BHTKSP
                 return true;
             }
         }
-
-        private void BHRefuel()
-        {
-            Debug.Log("[BHT]41");
-            if (BlackHoleRefueling == true)
-            {
-                Debug.Log("[BHT]42");
-                //Add function to be able to add fuel without being able to pull out. 
-                if (Fuel2Active() == false)
-                {
-                    Debug.Log("[BHT]43");
-                    if (Fuel1Present(true)) { Debug.Log("[BHT]44"); }
-                    //Need to put MassAdding in here
-                    else
-                    {
-                        Debug.Log("[BHT]45");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                }
-                else
-                {
-                    Debug.Log("[BHT]46");
-                    if ((Fuel2Present(true)) && (Fuel1Present(true))) { Debug.Log("[BHT]47"); }
-                    else if ((Fuel1Present(true)) && (Fuel2Present(false)))
-                    {
-                        Debug.Log("[BHT]48");
-                        part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                    else if ((Fuel1Present(false)) && (Fuel2Present(true)))
-                    {
-                        Debug.Log("[BHT]49");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                    else
-                    {
-                        Debug.Log("[BHT]50");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                        part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                }
-            }
-        }
-
-        private bool Fuel1Present(bool present)
+        
+        private bool Fuel1Present()
         {
             if (part.Resources.Contains(Fuel1Name))
             {
-                return present = true;
+                return true;
             }
             else
             {
-                return present = false;
+                return false;
             }
         }
 
-        private bool Fuel2Present(bool present)
+        private bool Fuel2Present()
         {
             if (part.Resources.Contains(Fuel2Name))
             {
-                return present = true;
+                return true;
             }
             else
             {
-                return present = false;
+                return false;
             }
         }
+        
+        PartResource[] GetResourceList(PartResourceList resourceList)
+        {
+            DictionaryValueList<int, PartResource> prl = resourceList.dict;
+            PartResource[] resources = new PartResource[prl.Count];
+            prl.Values.CopyTo(resources, 0);
+            return resources;
+        }
 
+        private double GetCfgInfo(string NodeName)
+        {
+            return double.Parse(cNode.GetNode(blackHoleModule).GetValues(NodeName)[0]);
+        }
+        
         //Runs on launch of vessel
         public void Start()
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
+                BHECCost = GetCfgInfo(ECCost);
+                PartResourceList BHT = this.part.Resources;
+                PartResource[] res = GetResourceList(BHT);
+                Fuel1Name = res[0].resourceName;
+                Debug.Log("[BHT]0.0 " + Fuel1Name);
+                Debug.Log("[BHT]0.2 " + Fuel2Active());
                 fuel1MaxAmount = DoubleToFloat(GetResourceAmount(Fuel1Name, true));
                 fuel1Amount = DoubleToFloat(GetResourceAmount(Fuel1Name));
                 Debug.Log("[BHT]0");
-                if (FuelTypes == 2)
+                if (Fuel2Active() == true)
                 {
+                    Fuel2Name = res[1].resourceName;
                     fuel2MaxAmount = DoubleToFloat(GetResourceAmount(Fuel2Name, true));
                     fuel2Amount = DoubleToFloat(GetResourceAmount(Fuel2Name));
-                    Debug.Log("[BHT]0.1");
+                    Debug.Log("[BHT]0.1" + Fuel2Name);
                 }
+                BlackHoleStatus = "Disabled";
                 DoCatchup();
             }
         }
 
-        //Got rid of public void Update, uneeded, as we don't have a custom GUI.
-
-    /*
-        Debug.Log("[BHT]41");
-            if (BlackHoleRefueling == true)
-            {
-                Debug.Log("[BHT]42");
-                //Add function to be able to add fuel without being able to pull out. 
-                if (Fuel2Active() == false)
-                {
-                    Debug.Log("[BHT]43");
-                    if (Fuel1Present(true)) { Debug.Log("[BHT]44"); }
-                    //Need to put MassAdding in here
-                    else
-                    {
-                        Debug.Log("[BHT]45");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                }
-                else
-                {
-                    Debug.Log("[BHT]46");
-                    if ((Fuel2Present(true)) && (Fuel1Present(true))){ Debug.Log("[BHT]47"); }
-                    else if ((Fuel1Present(true)) && (Fuel2Present(false)))
-                    {
-                        Debug.Log("[BHT]48");
-                        part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                    else if ((Fuel1Present(false)) && (Fuel2Present(true)))
-                    {
-                        Debug.Log("[BHT]49");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                    else
-                    {
-                        Debug.Log("[BHT]50");
-                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                        part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
-                    }
-                }
-            }
-            */
-
-        public void FixedUpdate()//If needed this can be Update()... I think...
+        public void FixedUpdate()
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
@@ -332,13 +295,16 @@ namespace BHTKSP
                     Debug.Log("[BHT]1");
                     if (BlackHoleEnabled == true)
                     {
+                        BlackHoleStatus = "Enabled";
                         Debug.Log("[BHT]2");
-                        if (Fuel1Present(true))
+                        part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)3);
+                        if (Fuel1Present() == true)
                         {
                             Debug.Log("[BHT]3");
                             if (fuel1Amount == 0.0)
                             {
                                 BlackHoleEnabled = false;
+                                BlackHoleStatus = "Disabled";
                                 Debug.Log("[BHT]4");
                                 part.Resources.Remove(Fuel1Name);
                             }
@@ -352,11 +318,11 @@ namespace BHTKSP
                         else
                         {
                             Debug.Log("[BHT]6");
-                            part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)3);
                             if (fuel1Amount == 0.0)
                             {
                                 Debug.Log("[BHT]7");
                                 BlackHoleEnabled = false;
+                                BlackHoleStatus = "Disabled";
                                 part.Resources.Remove(Fuel1Name);
                             }
                             else
@@ -371,7 +337,9 @@ namespace BHTKSP
                     {
                         Debug.Log("[BHT]9");
                         BlackHoleEnabled = false;
-                        if (Fuel1Present(true)) { Debug.Log("[BHT]44"); }
+                        BlackHoleStatus = "Refueling";
+                        if (Fuel1Present() == true)
+                            Debug.Log("[BHT]44"); 
                         //Need to put MassAdding in here
                         else
                         {
@@ -381,6 +349,8 @@ namespace BHTKSP
                     }
                     else
                     {
+                        BlackHoleEnabled = false;
+                        BlackHoleStatus = "Disabled";
                         Debug.Log("[BHT]10");
                         fuel1Amount = DoubleToFloat(GetResourceAmount(Fuel1Name));
                         if (part.Resources.Contains(Fuel1Name))
@@ -393,15 +363,18 @@ namespace BHTKSP
                 }
                 else//If fuel 2 is active
                 {
+                    Debug.Log("[BHT]1.5");
                     if (BlackHoleEnabled == true)
                     {
+                        BlackHoleStatus = "Enabled";
                         Debug.Log("[BHT]13");
-                        if ((Fuel1Present(true)) && (Fuel2Present(true)))
+                        if ((Fuel1Present() == true) && (Fuel2Present() == true))
                         {
                             Debug.Log("[BHT]14");
                             if ((fuel1Amount == 0.0) && (fuel2Amount == 0.0))
                             {
                                 BlackHoleEnabled = false;
+                                BlackHoleStatus = "Disabled";
                                 Debug.Log("[BHT]15");
                                 part.Resources.Remove(Fuel1Name);
                                 part.Resources.Remove(Fuel2Name);
@@ -414,14 +387,14 @@ namespace BHTKSP
                                 ConsumeCharge();
                             }
                         }
-                        else if ((Fuel1Present(false)) && (Fuel2Present(true)))
+                        else if ((Fuel1Present() == false) && (Fuel2Present() == true))
                         {
                             part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)3);
                             Debug.Log("[BHT]17");
                             if ((fuel1Amount == 0.0) && (fuel2Amount == 0.0))
                             {
                                 BlackHoleEnabled = false;
-
+                                BlackHoleStatus = "Disabled";
                                 Debug.Log("[BHT]18");
                                 part.Resources.Remove(Fuel1Name);
                                 part.Resources.Remove(Fuel2Name);
@@ -434,13 +407,14 @@ namespace BHTKSP
                                 ConsumeCharge();
                             }
                         }
-                        else if ((Fuel1Present(true)) && (Fuel2Present(false)))
+                        else if ((Fuel1Present() == true) && (Fuel2Present() == false))
                         {
                             part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)3);
                             Debug.Log("[BHT]20");
                             if ((fuel1Amount == 0.0) && (fuel2Amount == 0.0))
                             {
                                 BlackHoleEnabled = false;
+                                BlackHoleStatus = "Disabled";
                                 Debug.Log("[BHT]21");
                                 part.Resources.Remove(Fuel1Name);
                                 part.Resources.Remove(Fuel2Name);
@@ -461,6 +435,7 @@ namespace BHTKSP
                             if ((fuel1Amount == 0.0) && (fuel2Amount == 0.0))
                             {
                                 BlackHoleEnabled = false;
+                                BlackHoleStatus = "Disabled";
                                 Debug.Log("[BHT]24");
                                 part.Resources.Remove(Fuel1Name);
                                 part.Resources.Remove(Fuel2Name);
@@ -478,13 +453,14 @@ namespace BHTKSP
                     {
                         Debug.Log("[BHT]46");
                         BlackHoleEnabled = false;
-                        if ((Fuel2Present(true)) && (Fuel1Present(true))) { Debug.Log("[BHT]47"); }
-                        else if ((Fuel1Present(true)) && (Fuel2Present(false)))
+                        BlackHoleStatus = "Refueling";
+                        if ((Fuel2Present() == true) && (Fuel1Present() == true)) { Debug.Log("[BHT]47"); }
+                        else if ((Fuel1Present() == true) && (Fuel2Present() == false))
                         {
                             Debug.Log("[BHT]48");
                             part.Resources.Add(Fuel2Name, FloatToDouble(fuel2Amount), FloatToDouble(fuel2MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
                         }
-                        else if ((Fuel1Present(false)) && (Fuel2Present(true)))
+                        else if ((Fuel1Present() == false) && (Fuel2Present() == true))
                         {
                             Debug.Log("[BHT]49");
                             part.Resources.Add(Fuel1Name, FloatToDouble(fuel1Amount), FloatToDouble(fuel1MaxAmount), true, false, false, true, (PartResource.FlowMode)2);
@@ -498,6 +474,8 @@ namespace BHTKSP
                     }
                     else
                     {
+                        BlackHoleEnabled = false;
+                        BlackHoleStatus = "Disabled";
                         Debug.Log("[BHT]26");
                         fuel1Amount = DoubleToFloat(GetResourceAmount(Fuel1Name));
                         fuel2Amount = DoubleToFloat(GetResourceAmount(Fuel2Name));
@@ -525,7 +503,7 @@ namespace BHTKSP
                 if (Fuel2Active() == false)
                 {
                     Debug.Log("[BHT]29");
-                    double Ec = GetResourceAmount("ElectricCharge");
+                    double Ec = GetResourceAmount("ElectricCharge", false);
                     if (Ec <= BHECCost)
                     {
                         BlackHoleEnabled = false;
@@ -549,7 +527,7 @@ namespace BHTKSP
                 else
                 {
                     Debug.Log("[BHT]33");
-                    double Ec = GetResourceAmount("ElectricCharge");
+                    double Ec = GetResourceAmount("ElectricCharge", false);
                     if (Ec <= BHECCost)
                     {
                         BlackHoleEnabled = false;
