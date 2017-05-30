@@ -64,6 +64,7 @@ namespace BHTKSP
         public string BlackHoleStatus;
 
         private ConfigNode cNode;
+
         private string blackHoleModule = "ModuleBlackHole";
         
         [KSPEvent(guiActive = false, guiName = "Activate Black Hole", active = true)]
