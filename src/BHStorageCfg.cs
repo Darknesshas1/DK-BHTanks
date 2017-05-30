@@ -20,13 +20,13 @@ namespace BHTKSP
 {
     public class ModuleBlackHole : PartModule
     {
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public int FuelTypes; //FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. 
 
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public string Fuel1Name;
 
-        [KSPField(isPersistant = false)]
+        [KSPField(isPersistant = true)]
         public string Fuel2Name;
 
         //Last timestamp the BH was activated
