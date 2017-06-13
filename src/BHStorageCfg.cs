@@ -16,22 +16,7 @@ using System.Text;
 using UnityEngine;
 using KSP;
 
-namespace BHTKSP
-{
-    public class ModuleBlackHole : PartModule
-    {
-<<<<<<< HEAD
-        [KSPField(isPersistant = true)]
-        public int FuelTypes; //FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. 
-
-        [KSPField(isPersistant = true)]
-=======
-        [KSPField(isPersistant = true)]//Got rid of fuelTypes, because we already have bool Fuel2Active()
->>>>>>> 0e409f93c3e750b76633fc79f71349f4fc8caef7
-        public string Fuel1Name;
-
-        [KSPField(isPersistant = true)]
-        public string Fuel2Name;
+namespace BHTKSP{public class ModuleBlackHole : PartModule{<<<<<<< HEAD[KSPField(isPersistant = true)]public int FuelTypes; /*FuelTypes is either equal to one or two to say how many types of fuel there are stored in the tank. */[KSPField(isPersistant = true)]=======[KSPField(isPersistant = true)]/*Got rid of fuelTypes, because we already have bool */Fuel2Active()>>>>>>> 0e409f93c3e750b76633fc79f71349f4fc8caef7public string Fuel1Name;[KSPField(isPersistant = true)]public string Fuel2Name;
 
         //Last timestamp the BH was activated
         [KSPField(isPersistant = true)]
