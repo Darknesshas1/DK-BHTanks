@@ -1,0 +1,14 @@
+﻿Revert "Delete Black Hole Plugin.csproj.user"
+
+This reverts commit 899d9ffe641615f2de1c0a12ab27b4923dcdef9e.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	new file:   src/Black Hole Plugin.csproj.user
+#
+
