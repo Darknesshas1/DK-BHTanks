@@ -1,0 +1,30 @@
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\Black Hole Plugin.csprojResolveAssemblyReference.cache
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\Black Hole Plugin.csprojResolveAssemblyReference.cache
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\ClassLibrary.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\ClassLibrary.pdb
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Assembly-CSharp.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\UnityEngine.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\TrackIRUnity.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\UnityEngine.UI.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\KSPAssets.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Mono.Cecil.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\TDx.TDxInput.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Mono.Security.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\UnityEngine.xml
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\ClassLibrary.dll
+C:\Users\TheGuys\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\ClassLibrary.pdb
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\ClassLibrary.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\ClassLibrary.pdb
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Assembly-CSharp.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\UnityEngine.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\TrackIRUnity.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\UnityEngine.UI.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\KSPAssets.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Mono.Cecil.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\TDx.TDxInput.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\Mono.Security.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\bin\Debug\UnityEngine.xml
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\ClassLibrary.dll
+C:\Users\bcronin\Documents\GitHub\DK-BHTanks\src\DK-BHTanks\GameData\BlackHoleTanks\Plugins\obj\Debug\ClassLibrary.pdb
